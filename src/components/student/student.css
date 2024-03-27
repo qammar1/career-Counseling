@@ -1,0 +1,15 @@
+.mainAttemptQuiz{
+    padding-top: 60px;
+}
+
+.checkboxes{
+    display: flex;
+    justify-content: center;
+    padding-right: 5px;
+}
+.checkboxes input{
+    width: 25px;
+}
+.checkboxes label{
+    display: flex;
+}

@@ -36,7 +36,7 @@
     padding: 5px;
     border-radius: 7px;
     width: 20;
-    background-color: green;
+    background-color:var(--green-color);
     color: white;
 }
 .detail{
@@ -44,10 +44,19 @@
     padding: 5px;
     border-radius: 7px;
     max-width: 450px;
+    width: fit-content;
 }
 .expertHome{
     padding-top: 7cap;
   }
   .add-video-card{
-    padding-top: 3cap;
+    padding-top: 1cap;
+    /* margin-top: -20px; */
+  }
+  .image-upload label{
+    margin-left: -35px;
+    margin-top: 70px;
+    font-size: 26px;
+    cursor: pointer;
+    color: gray;
   }

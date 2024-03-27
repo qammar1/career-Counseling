@@ -1,37 +1,40 @@
-import React from "react";
-// import imageSrc from "./download.jpg";
+import React, { useEffect, useState } from "react";
 import user from "./user.jpg";
-import YouTube from 'react-youtube';
+import { Link } from "react-router-dom";
+const VideoCard = ({ video }) => {
+  const rating = 3;
+  const views = 20; 
+  const [name,setName] = useState('');
+  useEffect(()=>{
+    setName(video.DomainExpert);
+  },[])
 
-const VideoCard = () => {
-  // const imageSrc="";
-  const rating = 4;
-  const views = 20;
-  const title = "Learn machine learning";
-  const subDomain = "Artificial Intelligence";
-  const name = "qammar";
-const link = 'C6YtPJxNULA'
-  const opts = {
-    height: '150',
-    width: '270',
-    playerVars: {
-      autoplay: 0,
-      controls: 1, // This hides the player controls, but not the "Watch later" and "Share" buttons
-      modestbranding: 1, 
-    },
-  };
-  const videoOnReady = (event) => {
-    event.target.pauseVideo();
+  const object =  {name:name,image:user,rating:rating,link:video.Link,views:views,description:video.Description,title:video.Title}
+  // Function to extract video ID from URL
+  function extractVideoID(url) {
+    const regex =
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
   }
+  const videoID = extractVideoID(video.Link);
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoID}/0.jpg`; 
+
   return (
     <div className="cardVideo">
-      <div className="image-container">
-        {/* <img src={imageSrc} alt="Card" style={{ position: "relative" }} /> */}
-        <YouTube videoId={link} opts={opts} onReady={videoOnReady} />
-      </div>
+      <Link to='/videoPlayer' state={{object:object}}>
+        <div className="image-container">
+          <img
+            src={thumbnailUrl}
+            alt={video.Title}
+            style={{ width: "270px", height: "150px" }}
+          />
+        </div>
+      </Link>
       <div className="Cardcontent">
-        <h3>{title}</h3>
-        <p>{subDomain}</p>
+        <h3>{video.Title}</h3>
+        <p>Domain :: {video.Domain}</p>
+        <p className="description-clamp">{video.Description}</p>
         <div className="user-profile">
           <img src={user} alt="User" className="user-image" />
           <span className="user-name">{name}</span>
@@ -39,11 +42,13 @@ const link = 'C6YtPJxNULA'
         <div className="rating">
           <div className="stars">
             {[...Array(5)].map((_, index) => (
-              <span key={index} className={index < rating ? 'filled' : 'empty'}>★</span>
+              <span key={index} className={index < rating ? "filled" : "empty"}>
+                ★
+              </span>
             ))}
-            <p className='rating-num'>{rating}</p>
+            <p className="rating-num">{rating}</p>
           </div>
-          
+
           <div className="views"> {views} views</div>
         </div>
       </div>

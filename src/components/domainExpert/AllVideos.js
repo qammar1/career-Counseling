@@ -1,19 +1,42 @@
-import React, { useState } from 'react'
-import VideoCard from '../common/VideoCard'
-import Nav from '../common/Nav'
+import React, { useState, useContext, useEffect } from "react";
+import VideoCard from "../common/VideoCard";
+import Nav from "../common/Nav";
+import { CounsellingContext } from "../../Context/ContextApi";
+
 export default function AllVideos() {
-  const[arr,setarr] = useState([1,2,34,45,5,6])
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const { allVideos, getAllVideos } = useContext(CounsellingContext);
+  useEffect(() => {
+    getAllVideos();
+  }, []);
+  // Handle search input change
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value.toLowerCase());
+  };
+
+  // Filter videos based on search term
+  const filteredVideos = allVideos ? allVideos.filter(video => 
+    video.Title && video.Title.toLowerCase().includes(searchTerm)
+  ) : [];
+
+console.log(filteredVideos)
   return (
-   <React.Fragment>
-   <Nav/>
-   <div className="allVideos">
-  {arr.map((e, index) => (
-    <div key={index} className="videoCard">
-      <VideoCard />
-    </div>
-  ))}
-</div>
-   </React.Fragment> 
-  
-  )
+    <React.Fragment>
+      <Nav onSearch={handleSearch} />
+      <div className="allVideosMain">
+        <div className="allVideos">
+          {filteredVideos.length > 0 ? (
+            filteredVideos.map((video, index) => (
+              <div key={index} className="videoCard">
+                <VideoCard video={video} />
+              </div>
+            ))
+          ) : (
+            <p>No video found.</p>
+          )}
+        </div>
+      </div>
+    </React.Fragment>
+  );
 }

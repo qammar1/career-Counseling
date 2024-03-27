@@ -1,13 +1,13 @@
 .card {
-    width: 300px;
+    width: 320px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     margin: 0 auto;
-    height: 70vh;
-    margin-top: 8vh;
+    height: 100;
+    margin-top: 15vh;
     overflow: overlay
   }
   .cardSignUp {
@@ -18,7 +18,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     margin: 0 auto;
-    height: 80vh;
+    height: 100%;
     margin-top: 8vh;
   }
   label {
@@ -43,7 +43,7 @@
     width: 94%;
     padding: 8px;
     border-radius: 4px;
-    border: 1.5px solid #37A987;
+    border: 1.5px solid  var(--green-color);
     outline: none;
     
   
@@ -55,7 +55,7 @@
     padding: 10px;
     border-radius: 40px;
     border: none;
-    background-color: #37A987;
+    background-color:  var(--green-color);
     color: #fff;
     cursor: pointer;
     display: block;
@@ -64,7 +64,7 @@
   }
   
   button:hover {
-    background-color: rgb(33, 146, 114);
+    background-color: var(--hover-color);
   }
   
   p {
@@ -72,7 +72,7 @@
   }
   
   a {
-    color: #37A987;
+    color:  var(--green-color);
     text-decoration: none;
   }
   
@@ -80,7 +80,7 @@
     text-decoration: underline;
   }
   .forgetPassword{
-    color:#37A987;
+    color: var(--green-color);
     display: flex;
     justify-content: end;
     margin-top: 5px;
@@ -97,4 +97,85 @@
     transform: translateY(-50%);
     cursor: pointer;
   }
+  .validity{
+    display: flex;
+    color: red;
+    align-items: center;
+
+  }
+  .validity p{
+    color: red;
+    font-size: 0.9rem;
+    padding: 2px 5px
+  }
+  /* .validity i{
+    color:rgb(255, 251, 22)
+  } */
+
+  .icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+  }
   
+  .icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* cursor: pointer; */
+    font-size: 3rem;
+    border: 2px solid  var(--green-color);
+    padding: 20px;
+    border-radius: 20px;
+    height: 80px;
+    width: 110px;
+  }
+  .icon-p{
+    font-size: 16px;
+    text-decoration: none;
+    padding-top: 8px;
+  }
+  .icon-main{
+    padding: 20px;
+  }
+  .signup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 37px;
+  }
+  .signh2{
+    display: flex;
+    justify-content: center;
+  }
+  .input-group select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1.5px solid  var(--green-color);
+    border-radius: 4px;
+  }
+  .signup-success{
+    color: var(--green-color)
+  }
+  @media only screen and (max-width: 426px) {
+    .card {
+      height: 85vh;
+      width: 72%;
+      border: none;
+      overflow: hidden;
+    }
+    .cardSignUp{
+width: 72%;
+border: none;
+    }
+    .icon-container{
+flex-direction: column;
+    }
+    .icon{
+      font-size: 2rem;
+      padding: 10px;
+      height: 66px;
+    }
+  }

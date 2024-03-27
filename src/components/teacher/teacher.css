@@ -29,7 +29,7 @@
   }
 .allEvents{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   padding-left: 5cap;
   margin-top: -30px;
 }
@@ -45,6 +45,18 @@
 .teacherHomeMain h2{
 padding-left: 50px;
 }
-.HomeCards{
+/* .HomeCards{
   padding-left: 3cap;
+} */
+/*  responsive */
+@media only screen and (max-width: 320px) {
+ .allEvents{
+  grid-template-columns: repeat(1, 1fr);
+  padding-left: 1cap;
+  padding-right: 1cap;
+  }
+  .crd{
+    padding: 10px;
+    margin-top: 6vh
+  }
 }
