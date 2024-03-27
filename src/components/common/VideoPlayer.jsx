@@ -1,4 +1,5 @@
 import React from "react";
+import user from '../common/user.png'
 import { useLocation } from "react-router-dom";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
@@ -53,16 +54,7 @@ export default function VideoPlayer() {
               marginBottom: "20px",
             }}
           >
-            <img
-              src={image}
-              alt={name}
-              style={{
-                width: "50px",
-                height: "50px",
-                borderRadius: "50%",
-                marginRight: "10px",
-              }}
-            />
+           <img src={image || user} alt="User" className="user-image" />
             <span>@{name}</span>
 
             <div className="stars">

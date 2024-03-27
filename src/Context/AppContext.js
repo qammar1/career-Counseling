@@ -40,7 +40,7 @@ export const getAllDomain = async () => {
     }
 
     var data = await res.json();
-    console.log(data)
+    // console.log(data)
     return data; 
   } catch (error) {
     console.log('Error in getting domain', error);

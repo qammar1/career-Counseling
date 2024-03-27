@@ -1,5 +1,5 @@
 import React,{useContext, useEffect, useState} from "react";
-import defaultUser from "./user.jpg"; // Import default image
+import defaultUser from '../common/user.png'
 import Nav from "../common/Nav";
 import { CounsellingContext } from "../../Context/ContextApi";
 
@@ -28,7 +28,7 @@ const ExpertProfile = () => {
   // Call the async function
   fetchDomainExpert();
 }, [userData.Id, getDomainExpertByUserId]);
-console.log(domains)
+// console.log(domains)
   return (
     <React.Fragment>
       <Nav />

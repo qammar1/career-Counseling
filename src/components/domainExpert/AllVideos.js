@@ -20,7 +20,6 @@ export default function AllVideos() {
     video.Title && video.Title.toLowerCase().includes(searchTerm)
   ) : [];
 
-console.log(filteredVideos)
   return (
     <React.Fragment>
       <Nav onSearch={handleSearch} />

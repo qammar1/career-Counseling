@@ -11,6 +11,9 @@ const AddVideo = () => {
   const [selectedDomain, setSelectedDomain] = useState('');
   const [failed, setFailed] = useState(false);
   const [isVideoSuccess, setIsVideoSuccess] = useState(false);
+  const [level,setLevel] = useState('')
+  const levels = ["Basic", "Intermediate", "Advance"];
+
 
     // Reset all input fields
     const resetFields = () => {
@@ -75,6 +78,7 @@ const AddVideo = () => {
     const pattern = /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
     return pattern.test(url);
   };
+  // console.log(level);
   
   return (
     <React.Fragment>
@@ -128,6 +132,23 @@ const AddVideo = () => {
               }}
               placeholder="Enter descrptions of video"
             />
+          </div>
+          <div className="input-group">
+            <label htmlFor="domain">Video Level:</label>
+            <select
+              id="level"
+              value={level}
+              onChange={(e) => setLevel(e.target.value)}
+            >
+              <option value="" disabled>
+                Choose level
+              </option>
+              {levels.map((value,index) => (
+                <option key={index} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="input-group">
             <label htmlFor="domain">Choose domain:</label>

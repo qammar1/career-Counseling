@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import user from "./user.jpg";
+// import user from "../domainExpert/user.jpg";
+import user from "./user.png";
 import { Link } from "react-router-dom";
 const VideoCard = ({ video }) => {
   const rating = 3;
   const views = 20; 
   const [name,setName] = useState('');
+  const [imageSrc,setImageSrc] = useState();
   useEffect(()=>{
     setName(video.DomainExpert);
   },[])
 
-  const object =  {name:name,image:user,rating:rating,link:video.Link,views:views,description:video.Description,title:video.Title}
+  const object =  {name:name,rating:rating,link:video.Link,views:views,description:video.Description,title:video.Title}
   // Function to extract video ID from URL
   function extractVideoID(url) {
     const regex =
@@ -32,11 +34,11 @@ const VideoCard = ({ video }) => {
         </div>
       </Link>
       <div className="Cardcontent">
-        <h3>{video.Title}</h3>
+        <h3 className="description-clamp">{video.Title}</h3>
         <p>Domain :: {video.Domain}</p>
         <p className="description-clamp">{video.Description}</p>
         <div className="user-profile">
-          <img src={user} alt="User" className="user-image" />
+        <img src={imageSrc || user} alt="User" className="user-image" />
           <span className="user-name">{name}</span>
         </div>
         <div className="rating">

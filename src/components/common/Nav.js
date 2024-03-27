@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CounsellingContext } from "../../Context/ContextApi";
-import img from "./user.jpg";
+import img from "./user.png";
 import { Link } from "react-router-dom";
 function Nav({ onSearch }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState("Domain Expert");
-  // const { userData } = useContext(CounsellingContext);
+  const [user, setUser] = useState("");
+  const { userData } = useContext(CounsellingContext);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
   const hideButton = () => {
@@ -22,9 +22,9 @@ function Nav({ onSearch }) {
     onSearch(event);
   };
 
-  // useEffect(() => {
-  //   setUser(userData ? userData.Role : null);
-  // }, [userData]);
+  useEffect(() => {
+    setUser(userData ? userData.Role : null);
+  }, [userData]);
   return (
     <div>
       <div className="app">

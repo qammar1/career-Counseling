@@ -1,6 +1,6 @@
 import React,{useContext, useEffect, useState} from "react";
 // import user from "./user.jpg";
-import defaultUser from "./user.jpg"; // Import default image
+import defaultUser from "../common/user.png"; // Import default image
 import Nav from "../common/Nav";
 import { CounsellingContext } from "../../Context/ContextApi";
 
