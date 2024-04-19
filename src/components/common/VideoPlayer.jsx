@@ -55,8 +55,9 @@ export default function VideoPlayer() {
             }}
           >
            <img src={image || user} alt="User" className="user-image" />
-            <span>@{name}</span>
+           <div style={{display:"flex",flexDirection:"column"}}>
 
+            <span>@{name}</span>
             <div className="stars">
               {[...Array(5)].map((_, index) => (
                 <span
@@ -67,6 +68,8 @@ export default function VideoPlayer() {
                 </span>
               ))}
             </div>
+           </div>
+            
             <div className="rating-views">
               <span>{views}Views</span>
             </div>

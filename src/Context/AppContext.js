@@ -1,4 +1,4 @@
-var url = "http://192.168.0.102/CareerCounselligBackend/api/careercounselling/";
+var url = "http://192.168.0.103/CareerCounselligBackend/api/careercounselling/";
 
 // // signup domain expert
 export const addDomainExpert = async (domainExpert, userData, domainId) => {
@@ -14,12 +14,11 @@ export const addDomainExpert = async (domainExpert, userData, domainId) => {
       },
       body: JSON.stringify({domainExpert: domainExpert, user: userData}),
     });
-
-    console.log('Request URL:', apiUrl);
-    console.log(
-      'Request Data:',
-      JSON.stringify({domainExpert: domainExpert, user: userData}),
-    );
+    // console.log('Request URL:', apiUrl);
+    // console.log(
+    //   'Request Data:',
+    //   JSON.stringify({domainExpert: domainExpert, user: userData}),
+    // );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -40,7 +39,6 @@ export const getAllDomain = async () => {
     }
 
     var data = await res.json();
-    // console.log(data)
     return data; 
   } catch (error) {
     console.log('Error in getting domain', error);

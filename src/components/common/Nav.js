@@ -3,9 +3,11 @@ import { CounsellingContext } from "../../Context/ContextApi";
 import img from "./user.png";
 import { Link } from "react-router-dom";
 function Nav({ onSearch }) {
+
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState("");
-  const { userData } = useContext(CounsellingContext);
+  const [image,setImage] = useState(img);
+  const [user, setUser] = useState("Domain Expert");
+  const { userData,userImage,flag} = useContext(CounsellingContext);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
   const hideButton = () => {
@@ -25,6 +27,14 @@ function Nav({ onSearch }) {
   useEffect(() => {
     setUser(userData ? userData.Role : null);
   }, [userData]);
+
+  useEffect(()=>{
+    const img = localStorage.getItem('userImage')
+    setImage(img);
+    // console.log(img)
+    // console.log('heelo')
+  },[flag])
+
   return (
     <div>
       <div className="app">
@@ -50,7 +60,7 @@ function Nav({ onSearch }) {
               </Link>
               <Link to="/expertProfile">
                 <div className="navpic">
-                  <img src={img} alt="User" />
+                  <img src={image} alt="User" />
                 </div>
               </Link>
             </div>
@@ -59,7 +69,7 @@ function Nav({ onSearch }) {
             <div className="addVideobtn">
               <Link to="/schoolProfile">
                 <div className="navpic">
-                  <img src={img} alt="User" />
+                  <img src={image} alt="User" />
                 </div>
               </Link>
             </div>
@@ -72,7 +82,7 @@ function Nav({ onSearch }) {
               </Link>
               <Link to="/teacherProfile">
                 <div className="navpic">
-                  <img src={img} alt="User" />
+                  <img src={image} alt="User" />
                 </div>
               </Link>
             </div>
@@ -81,6 +91,11 @@ function Nav({ onSearch }) {
             <div className="addVideobtn">
               <Link to="/interestVideos">
                 <i className="fas fa-video"></i>
+              </Link>
+              <Link to="/studentProfile">
+              <div className="navpic">
+                  <img src={image} alt="User" />
+                </div>
               </Link>
             </div>
           ) : null}
