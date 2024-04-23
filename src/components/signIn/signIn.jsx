@@ -38,7 +38,7 @@ export default function SgnIn () {
       }
     } catch (error) {
       setLoginFailed(true);
-      console.log("not found");
+      // console.log("not found");
     }
   };
   return (

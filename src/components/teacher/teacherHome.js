@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     getAllVideos();
   }, []);
-  console.log(allVideos)
+  // console.log(allVideos)
   return (
     <React.Fragment>
       <Nav/>

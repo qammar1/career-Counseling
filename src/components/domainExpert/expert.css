@@ -49,6 +49,10 @@
 .expertHome{
     padding-top: 7cap;
   }
+.expertHome h2{
+    /* padding-top: 7cap; */
+    text-align: center !important;
+  }
   .add-video-card{
     padding-top: 1cap;
     /* margin-top: -20px; */

@@ -50,7 +50,7 @@ function SignUpExpert() {
     e.preventDefault();
     try {
       const domainId = selectedDomain;
-      console.log(domainId);
+      // console.log(domainId);
       const result = await addDomainExpert(DomainExpert, UserData, domainId);
       if (result) {
         setIsSignUpSuccess(true);

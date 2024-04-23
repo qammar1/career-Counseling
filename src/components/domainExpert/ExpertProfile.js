@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import defaultUser from "../common/user.png";
+import dummy from "../common/user.png";
 import Nav from "../common/Nav";
 import { CounsellingContext } from "../../Context/ContextApi";
 
 const ExpertProfile = () => {
-  const [imageSrc, setImageSrc] = useState(defaultUser);
+  const [imageSrc, setImageSrc] = useState(dummy);
   const [name, setName] = useState("");
   const [domains, setDomains] = useState([]);
   const designation = "Domain Expert";
-  const { userData, getDomainExpertByUserId,flag} = useContext(CounsellingContext);
+  const { userData, getDomainExpertByUserId,flag,getUserProfilePic} = useContext(CounsellingContext);
 
   useEffect(() => {
     const fetchDomainExpert = async () => {
@@ -23,17 +23,40 @@ const ExpertProfile = () => {
         }
       }
     };
-    console.log(imageSrc);
+    // console.log(imageSrc);
     // Call the async function
     fetchDomainExpert();
   }, [userData.Id, getDomainExpertByUserId]);
   // console.log(domains)
-  useEffect(()=>{
-    const img = localStorage.getItem('userImage')
-    setImageSrc(img);
-    // console.log(img)
-    // console.log('heelo')
-  },[flag])
+  // useEffect(()=>{
+  //   const img = localStorage.getItem('userImage')
+  //   if(img!='Image not found'){
+  //     setImageSrc(img);
+  //   }
+  //   else{
+  //     setImageSrc(defaultUser)
+  //   }
+  //   console.log(img)
+  //   // console.log('heelo')
+  // },[flag])
+  useEffect(() => {
+    if (userData) {
+        const fetchImage = async () => {
+            try {
+                const profilePic = await getUserProfilePic(userData.UserName);
+                if (profilePic !== "Image not found") {
+                  setImageSrc(profilePic);
+                } else {
+                  setImageSrc(dummy);
+                }
+            } catch (error) {
+                console.error("Failed to fetch user image", error);
+                setImageSrc(dummy);
+            }
+        };
+        fetchImage();
+    }
+}, [userData, getUserProfilePic, setImageSrc]);
   return (
     <React.Fragment>
       <Nav />

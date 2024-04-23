@@ -1,4 +1,4 @@
-var url = "http://192.168.0.103/CareerCounselligBackend/api/careercounselling/";
+var url = "http://192.168.0.104/CareerCounselligBackend/api/careercounselling/";
 
 // // signup domain expert
 export const addDomainExpert = async (domainExpert, userData, domainId) => {

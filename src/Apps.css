@@ -75,7 +75,7 @@
   margin-right: 2px;
 }
 .stars .filled {
-  color: var(--green-color);
+  color: gold
 }
 .stars .empty {
   color: #ccc;
@@ -339,6 +339,7 @@ padding-top: 7cap;
 
 /* for responsive */
 @media only screen and (max-width: 426px) {
+
   .sidebar, .content, .navbar, .allVideos, .video {
     padding: 0;
     margin: 0;
@@ -355,6 +356,9 @@ padding-top: 7cap;
     padding-left: 4cap;
     
   }
+  .allVideosMain{
+    padding-top: 0cap;
+    }
   .searchBar input{
     padding: 5px;
   }
@@ -383,6 +387,10 @@ padding-top: 7cap;
     grid-template-columns: 1fr; /* Only one column for very small screens */
     /* padding-top: 5cap; */
   }
+  .allVideos h2{
+    padding-top: 5cap;
+    text-align: center;
+  }
 
   /* Adjust sidebar styling for very small screens */
   .sidebar.open {
@@ -394,7 +402,7 @@ padding-top: 7cap;
     font-size: 18px; /* Slightly larger font for easier tapping */
   }
   .video{
-  padding-left: 4cap !important;
+  padding-left: 0cap !important;
   padding-top: 20cap !important;
   justify-content: flex-start;
   }
@@ -420,4 +428,72 @@ padding-top: 7cap;
   .rating-views span {
     font-size: 0.8rem; /* Adjust font size */
   }
+}
+/* nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn */
+.video-player-screen {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  color: black;
+  font-weight: bold;
+}
+
+.description {
+  cursor: pointer;
+}
+
+.expert-info {
+  display: flex;
+  align-items: center;
+}
+
+.expert-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-right: 10px;
+}
+
+.feedback-section {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.feedback-button {
+  background-color:rgb(12, 152, 117);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+ 
+}
+.filled {
+  color: gold;
 }

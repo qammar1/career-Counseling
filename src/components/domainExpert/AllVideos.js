@@ -4,8 +4,7 @@ import Nav from "../common/Nav";
 import { CounsellingContext } from "../../Context/ContextApi";
 
 export default function AllVideos() {
-  const [searchTerm, setSearchTerm] = useState('');
-
+  const [searchTerm, setSearchTerm] = useState("");
   const { allVideos, getAllVideos } = useContext(CounsellingContext);
   useEffect(() => {
     getAllVideos();
@@ -16,18 +15,22 @@ export default function AllVideos() {
   };
 
   // Filter videos based on search term
-  const filteredVideos = allVideos ? allVideos.filter(video => 
-    video.Title && video.Title.toLowerCase().includes(searchTerm)
-  ) : [];
-
+  const filteredVideos = allVideos
+    ? allVideos.filter(
+        (video) => video.Title && video.Title.toLowerCase().includes(searchTerm)
+      )
+    : [];
+  // console.log(allVideos[0]);
+  // console.log(allVideos)
   return (
     <React.Fragment>
       <Nav onSearch={handleSearch} />
       <div className="allVideosMain">
         <div className="allVideos">
+        <h2>All Videos</h2>
           {filteredVideos.length > 0 ? (
             filteredVideos.map((video, index) => (
-              <div key={index} className="videoCard">
+              <div key={video.Id} className="videoCard">
                 <VideoCard video={video} />
               </div>
             ))

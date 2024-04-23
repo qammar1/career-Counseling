@@ -1,13 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CounsellingContext } from "../../Context/ContextApi";
-import img from "./user.png";
+import dummy from "./user.png";
 import { Link } from "react-router-dom";
 function Nav({ onSearch }) {
-
   const [isOpen, setIsOpen] = useState(false);
-  const [image,setImage] = useState(img);
+  const [image, setUserImage] = useState(dummy);
   const [user, setUser] = useState("Domain Expert");
-  const { userData,userImage,flag} = useContext(CounsellingContext);
+  const { userData, flag, getUserProfilePic } = useContext(CounsellingContext);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
   const hideButton = () => {
@@ -16,6 +15,8 @@ function Nav({ onSearch }) {
   const signOut = () => {
     setIsOpen(!isOpen);
     localStorage.removeItem("userData");
+    localStorage.removeItem("userImage");
+    // console.log("signout");
   };
   //search baar
   const [query, setQuery] = useState("");
@@ -27,14 +28,85 @@ function Nav({ onSearch }) {
   useEffect(() => {
     setUser(userData ? userData.Role : null);
   }, [userData]);
+  // useEffect(() => {
+  //   async function checkAndFetchImage() {
+  //     console.log("called")
+  //     // let img = localStorage.getItem("userImage");
+  //     // console.log(img);
+  //     // if (img!=='Image not found' || img !=null) {
+  //     try {
+  //       const profilePic = await getUserProfilePic(userData.UserName);
+  //       console.log("updated photo is"+profilePic);
+  //       if (profilePic !== "Image not found") {
+  //         // console.log("this also called")
+  //         localStorage.setItem("userImage", profilePic);
+  //         setImage(profilePic);
+  //       } else {
+  //         localStorage.setItem("userImage", dummy);
+  //         setImage(dummy);
+  //       }
+  //     } catch (error) {
+  //       console.error("Failed to fetch user image", error);
+  //       setImage(dummy);
+  //     }
+  //     // } else {
+  //     //   setImage(dummy);
+  //     // }
+  //   }
+  //   checkAndFetchImage();
+  // }, [flag]); // Added userData to update image on user change as well.
+  // console.log(flag)
+  // useEffect(() => {
+  //   async function checkAndFetchImage() {
+  //     let img = localStorage.getItem("userImage");
+  //     // console.log(img);
+  //     if (img !== "Image not found" || img != null) {
+  //       try {
+  //         const profilePic = await getUserProfilePic(userData.UserName);
+  //         if (profilePic != "Image not found") {
+  //           localStorage.setItem("userImage", profilePic);
+  //           setImage(profilePic);
+  //         } else {
+  //           setImage(dummy);
+  //         }
+  //       } catch (error) {
+  //         console.error("Failed to fetch user image", error);
+  //         setImage(dummy);
+  //       }
+  //     } else {
+  //       setImage(dummy);
+  //     }
+  //   }
+  //   checkAndFetchImage();
+  // }, []); // Added userData to update image on user change as well.
 
-  useEffect(()=>{
-    const img = localStorage.getItem('userImage')
-    setImage(img);
-    // console.log(img)
-    // console.log('heelo')
-  },[flag])
-
+  // useEffect(() => {
+  //   const img = localStorage.getItem("userImage");
+  //   // console.log(img)
+  //   console.log(img);
+  //   if (img == "Image not found") {
+  //     setImage(dummy);
+  //   }
+  // }, []);
+  
+  useEffect(() => {
+    if (userData) {
+        const fetchImage = async () => {
+            try {
+                const profilePic = await getUserProfilePic(userData.UserName);
+                if (profilePic !== "Image not found") {
+                    setUserImage(profilePic);
+                } else {
+                    setUserImage(dummy);
+                }
+            } catch (error) {
+                console.error("Failed to fetch user image", error);
+                setUserImage(dummy);
+            }
+        };
+        fetchImage();
+    }
+}, [userData, getUserProfilePic, setUserImage,flag]);
   return (
     <div>
       <div className="app">
@@ -93,7 +165,7 @@ function Nav({ onSearch }) {
                 <i className="fas fa-video"></i>
               </Link>
               <Link to="/studentProfile">
-              <div className="navpic">
+                <div className="navpic">
                   <img src={image} alt="User" />
                 </div>
               </Link>
@@ -157,7 +229,7 @@ function Nav({ onSearch }) {
             <>
               <Link to="/test" onClick={toggleSidebar}>
                 <div className="term">
-                <i class="fa-solid fa-file-lines"></i>
+                  <i class="fa-solid fa-file-lines"></i>
                   <p>Test</p>
                 </div>
               </Link>
