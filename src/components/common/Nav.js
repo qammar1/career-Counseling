@@ -139,6 +139,9 @@ function Nav({ onSearch }) {
           ) : null}
           {user === "School" ? (
             <div className="addVideobtn">
+            <Link to="/allVideos">
+                <i className="fas fa-video"></i>
+              </Link>
               <Link to="/schoolProfile">
                 <div className="navpic">
                   <img src={image} alt="User" />
@@ -242,7 +245,7 @@ function Nav({ onSearch }) {
             </>
           )}
           {user === "Teacher" ? (
-            <Link to="/teacherProfile" onClick={toggleSidebar}>
+            <Link to="/teacherSetting" onClick={toggleSidebar}>
               <div className="term">
                 <i className="fas fa-cog"></i>
                 <p>Setting</p>
@@ -258,7 +261,7 @@ function Nav({ onSearch }) {
             </Link>
           ) : null}
           {user === "Student" ? (
-            <Link to="/studentProfile" onClick={toggleSidebar}>
+            <Link to="/studentSetting" onClick={toggleSidebar}>
               <div className="term">
                 <i className="fas fa-cog"></i>
                 <p>Setting</p>

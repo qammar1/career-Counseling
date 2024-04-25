@@ -27,7 +27,7 @@ export default function AllVideos() {
       <Nav onSearch={handleSearch} />
       <div className="allVideosMain">
         <div className="allVideos">
-        <h2>All Videos</h2>
+        <h2 style={{textAlign:"center"}}>All Videos</h2>
           {filteredVideos.length > 0 ? (
             filteredVideos.map((video, index) => (
               <div key={video.Id} className="videoCard">

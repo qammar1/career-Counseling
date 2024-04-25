@@ -32,8 +32,14 @@ export default function SgnIn () {
         // console.log(respon);
         if (respon.Role === "Domain Expert") {
           navigate("/expertHome");
-        } else {
-          // Handle other roles or default navigation
+        } else if(respon.Role === "Student"){
+          navigate("/studentHome")
+        }
+         else if(respon.Role === "Teacher"){
+          navigate("/teacherHome")
+        }
+         else if(respon.Role === "School"){
+          navigate("/schoolHome")
         }
       }
     } catch (error) {

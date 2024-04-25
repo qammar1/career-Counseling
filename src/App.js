@@ -2,6 +2,7 @@ import React from "react";
 import './Apps.css'
 import '../src/components/student/student.css'
 import '../src/components/teacher/teacher.css'
+import '../src/components/school/school.css'
 import '../src/components/domainExpert/expert.css'
 import '../src/components/signIn/signIn.css'
 import SignIn from './components/signIn/signIn';
@@ -13,8 +14,12 @@ import { BrowserRouter as Router,Route,Routes } from 'react-router-dom';
 import AllVideos from './components/domainExpert/AllVideos';
 import ExpertHome from './components/domainExpert/ExpertHome';
 import AllEvents from './components/teacher/AllEvents';
-import TeacherProfile from './components/teacher/teacherProfile';
-import TeacherHome from './components/teacher/teacherHome'
+// import TeacherProfile from './components/teacher/TeacherProfile';
+// import TeacherHome from './components/teacher/TeacherHome'
+// import teacherHome from "./components/teacher/TeacherHome";
+import TeacherSetting from './components/teacher/TeacherSetting'
+import TeachersHome from "./components/teacher/TeachersHome";
+import TeachersProfile from "./components/teacher/TeachersProfile";
 import SignUpExpert from './components/signIn/signUpExpert';
 import SignUpSchool from './components/signIn/signUpSchool';
 import Options from "./components/signIn/options";
@@ -29,6 +34,7 @@ import StudentHome from "./components/student/StudentHome";
 import InterestVideos from "./components/student/InterestVideos";
 import ExpertSetting from "./components/domainExpert/ExpertSetting";
 import Test from "./components/student/Test";
+import StudentSetting from "./components/student/StudentSetting";
 // import './App.css'
 export default function App() {
   return (
@@ -52,18 +58,20 @@ export default function App() {
             <Route path="/expertSetting" element=<ExpertSetting />></Route>
             {/* teacher side */}
             <Route path="/allEvents" element=<AllEvents />></Route>
-            <Route path="/teacherProfile" element=<TeacherProfile />></Route>
-            <Route path="/teacherHome" element=<TeacherHome />></Route>
+            <Route path="/teacherProfile" element=<TeachersProfile />></Route>
+            <Route path="/teacherHome" element=<TeachersHome />></Route>
             <Route path="/createEvent" element=<CreateEvent />></Route>
+            <Route path="/teacherSetting" element=<TeacherSetting />></Route>
             {/* //student side */}
             <Route path="/studentProfile" element=<StudentProfile />></Route>
+            <Route path="/studentSetting" element=<StudentSetting />></Route>
             <Route path="/studentHome" element=<StudentHome />></Route>
             <Route path="/interestVideos" element=<InterestVideos />></Route>
             <Route path="/test" element=<Test />></Route>
 
             {/* //school Side */}
             <Route path="/schoolProfile" element=<SchoolProfile/>></Route>
-            <Route path="/shoolHome" element=<SchoolHome />></Route>
+            <Route path="/schoolHome" element=<SchoolHome />></Route>
             <Route path="/addTeacher" element=<AddTeacher />></Route>
             <Route path="/addStudent" element=<AddStudent/>></Route>
             <Route path="/schoolSetting" element=<SchoolSetting/>></Route>

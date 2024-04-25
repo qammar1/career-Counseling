@@ -1,97 +1,132 @@
 import React, { useEffect, useState } from "react";
 import Nav from "../common/Nav";
-import "@fortawesome/fontawesome-free/css/all.css";
-function AddTeacher() {
-  const [name, setName] = useState("");
-  const [userName, setUserName] = useState("");
-  const [phone, setPhone] = useState("");
+import { addTeacher,getAllUsername } from "../../Context/AppContext";
+const AddTeacherScreen = ({}) => {
+  const [fullName, setFullName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const classes = ["6th", "7th", "8th"];
+  const [usernames, setUsernames] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedClass, setSelectedClass] = useState("");
-  const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
 
-  // Reset all input fields
-  const resetFields = () => {
-    setName("");
-    setUserName("");
-    setPhone("");
-    setPassword("");
-    setSelectedClass("");
+  const handleAddTeacher = async () => {
+    // Your API endpoint for adding a teacher
+    // const apiUrl = "your_api_endpoint_here";
+
+    const schoolId = localStorage.getItem("SchoolId");
+
+    const Teacher = {
+      Name: fullName,
+      School: {
+        Id: schoolId,
+      },
+    };
+
+    const UserData = {
+      Name: fullName,
+      UserName: username,
+      Password: password,
+    };
+
+    console.log("Adding Teacher:", { Teacher, UserData });
+    try {
+      const result = await addTeacher(Teacher, UserData);
+      // ToastAndroid.show(result, ToastAndroid.SHORT);
+      // Reset the input fields
+      setFullName("");
+      setUsername("");
+      setPassword("");
+      console.log("API Response:", result);
+    } catch (error) {
+      console.error("Error in Adding Teacher:", error.message);
+    }
+
+    // try {
+    //   const response = await fetch(apiUrl, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ Teacher, UserData }),
+    //   });
+    //   const result = await response.text();
+    //   alert(result);
+    //   setFullName('');
+    //   setUsername('');
+    //   setPassword('');
+    // } catch (error) {
+    //   console.error('Error in Adding Teacher:', error.message);
+    // }
   };
 
-  const DomainExpert = {
-    Name: name,
+  // const getUsernames = async () => {
+  //   try {
+  //     // Your API endpoint for getting all usernames
+  //     const apiUrl = "your_api_endpoint_here";
+  //     const response = await fetch(apiUrl);
+  //     const data = await response.json();
+  //     if (data != null) {
+  //       setUsernames(data);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  const generateRandomUsername = () => {
+    const FullName = fullName.replace(/\s+/g, "_");
+    let newUsername = "";
+    do {
+      const randomNumber = Math.floor(Math.random() * 1000);
+      newUsername = FullName + randomNumber;
+    } while (usernames.includes(newUsername));
+    setUsername(newUsername);
   };
 
-  const UserData = {
-    Name: name,
-    UserName: userName,
-    Password: password,
-    Phone: phone,
+  const generateRandomPassword = () => {
+    const nameParts = fullName.split(" ")[0];
+    let newPassword = "";
+    do {
+      const randomNumber = Math.floor(Math.random() * 1000);
+      newPassword = nameParts + "@" + randomNumber;
+    } while (usernames.includes(newPassword));
+    setPassword(newPassword);
   };
 
-  //password visibility
+  useEffect(() => {
+    getAllUsername();
+  }, []);
+  console.log(password);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
-  // handle submit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // const result = await addDomainExpert(DomainExpert, UserData, domainId);
-      // if (result) {
-      //   setIsSignUpSuccess(true);
-      //   resetFields();
-      //   setTimeout(() => setIsSignUpSuccess(false), 3000);
-      // }
-    } catch (error) {
-      console.error("Error in SignUp:", error.message);
-    }
-  };
-  useEffect(() => {}, []);
   return (
     <React.Fragment>
       <Nav />
-    <div className="add-video-card">
-      <div className="cardSignUp">
-        <h2 className="signh2">Add Teacher</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="name">Name</label>
+      <div className="add-video-card">
+        <div className="card">
+          <h2>Add Teacher</h2>
+          <div>
+            <label>Full Name:</label>
             <input
-              type="text"
-              id="name"
-              placeholder="Enter Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Enter Full Name"
               required
+              onBlur={() => {
+                generateRandomPassword();
+                generateRandomUsername();
+              }}
             />
-          </div>
-          <div className="input-group">
-            <label htmlFor="userName">User Name</label>
-            <input
-              type="text"
-              id="userName"
-              placeholder="Enter user name"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
+            <label>Username:</label>
+            <input value={username} placeholder="Enter Username" readOnly />
+            <label>Password:</label>
             <div className="password-wrapper input-group">
               <input
                 type={showPassword ? "text" : "password"}
-                id="password"
-                placeholder="Enter Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+                placeholder="Enter Password"
+                readOnly
+              />{" "}
               <span
                 className="toggle-password"
                 onClick={togglePasswordVisibility}
@@ -103,62 +138,22 @@ function AddTeacher() {
                 )}
               </span>
             </div>
+            <button onClick={handleAddTeacher}>Add</button>
           </div>
-
-          <div className="input-group">
-            <label htmlFor="phone">Phone</label>
-            <input
-              type="tel"
-              id="phone"
-              placeholder="Enter your Phone Number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-            />
-          </div>
-
-          {/* <div className="input-group">
-          <label htmlFor="class">Class</label>
-          <input
-            type="number"
-            id="clas"
-            placeholder="Enter Class of student"
-            value={clas}
-            onChange={(e) => setClas(e.target.value)}
-            required
-          />
-        </div> */}
-          {/* <div className="input-group">
-            <label htmlFor="domain">Select Class:</label>
-            <select
-              id="domain"
-              value={selectedClass}
-              onChange={(e) => setSelectedClass(e.target.value)}
-            >
-              <option value="" disabled>
-                Select class
-              </option>
-              {classes.map((clas, index) => (
-                <option key={index} value={clas}>
-                  {clas}
-                </option>
-              ))}
-            </select>
-          </div> */}
-          {isSignUpSuccess && (
-            <p className="signup-success">Added successfully!</p>
-          )}
-          <button type="submit" className="centered-button">
-            ADD
-          </button>
-        </form>
-        {/* <p>
-        Already have an account? <a href="/SignIn">Login here</a>
-      </p> */}
+        </div>
       </div>
-    </div>
     </React.Fragment>
   );
-}
+};
 
-export default AddTeacher;
+// const styles = {
+//   container: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     padding: '20px',
+//   },
+// };
+
+export default AddTeacherScreen;

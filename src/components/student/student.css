@@ -13,3 +13,29 @@
 .checkboxes label{
     display: flex;
 }
+.background {
+    background-color: #FFF;
+    padding: 20px;
+  }
+  
+  .questionContainer {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #008B8B;
+    border-radius: 10px;
+  }
+  
+  .buttonContainer {
+    margin-top: 10px;
+    display: flex;
+  }
+  
+  button {
+    flex: 1;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 0 5px;
+    color: #FFF;
+    cursor: pointer;
+  }
+  

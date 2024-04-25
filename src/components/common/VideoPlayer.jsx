@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { CounsellingContext } from "../../Context/ContextApi";
+import { Link } from "react-router-dom";
 
 export default function VideoPlayer() {
   const [expandDescription, setExpandDescription] = useState(false);
@@ -102,11 +103,11 @@ export default function VideoPlayer() {
     handleRatingChange(index);
   };
   return (
-    <div className="video-player-screen">
+    <div className="video-player">
       <iframe
         title="youtube-video"
-        width="100%"
-        height="210px"
+        // width="100%"
+        // height="210px"
         src={`${embedUrl}?controls=1&rel=0&modestbranding=1`}
         frameBorder="0"
         allow="autoplay; encrypted-media"
@@ -127,6 +128,9 @@ export default function VideoPlayer() {
           </div>
         </div>
       </div>
+      <div style={{display:'flex',justifyContent:'flex-end',width:'100%',marginTop:'20px'}}>
+      <Link to='/allVideos' style={{paddingRight:'20px'}}>Back To All Videos</Link>
+      </div>
 
         <div className="feedback-section">
           <h2>Feedback ({allFeedback.length})</h2>
@@ -144,6 +148,7 @@ export default function VideoPlayer() {
       <button className="feedback-button" onClick={() => setModalVisible(true)}>
         Give feedback
       </button>
+   
 
       {modalVisible && (
         <div className="modal" onClick={() => setModalVisible(false)}>

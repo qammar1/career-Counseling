@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
+import Nav from "../common/Nav";
 
 // import './YourStylesheet.css'; // Import your CSS file
 
@@ -11,6 +12,9 @@ function CreateEvent() {
   };
 
   return (
+    <React.Fragment>
+<Nav/>
+<div className="add-video-card"></div>
     <div className="cardSignUp">
       <h2>Create Event</h2>
       <div className="input-group">
@@ -75,6 +79,7 @@ function CreateEvent() {
         Already have an account? <a href="SignIn">Login here</a>
       </p> */}
     </div>
+    </React.Fragment>
   );
 }
 

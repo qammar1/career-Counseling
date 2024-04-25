@@ -3,9 +3,12 @@ import Nav from '../common/Nav'
 
 export default function SchoolHome() {
   return (
-    <React.Fragment>
-<Nav/>
-    <div>SchoolHome</div>
-    </React.Fragment>
+   <React.Fragment>
+   <Nav/>
+    <div>
+
+    </div>
+   </React.Fragment>
+
   )
 }

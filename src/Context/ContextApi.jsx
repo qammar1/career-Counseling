@@ -69,6 +69,8 @@ function DataProvider({ children }) {
       setExpertData(data);
     }
   };
+  //GET USER DATA
+
 
   
 // const uploadImage = async (formData) => {
@@ -117,6 +119,7 @@ const getUserById = async id => {
       url + 'getUserById?id=' + encodeURIComponent(id),
     );
     const data = await response.json();
+    // console.log(data)
     // console.log(data);
     // setUpdateFlag(prev => !prev);
     // setUserImage(data);
@@ -162,6 +165,7 @@ const getUserById = async id => {
     
       const getUserProfilePic = async (imageName) => {
         try {
+          // console.log(imageName)
           const response = await fetch(`${url}SearchImage?imageName=${encodeURIComponent(imageName)}`);
           const data = await response.json();
           return data;

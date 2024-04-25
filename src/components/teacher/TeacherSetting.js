@@ -3,19 +3,20 @@ import dummy from "../common/user.png";
 import Nav from "../common/Nav";
 import { CounsellingContext } from "../../Context/ContextApi";
 import { Link } from "react-router-dom";
-
+import { getTeacherByUserId } from "../../Context/AppContext";
 const ExpertProfile = () => {
   const [imageSrc, setImageSrc] = useState(dummy);
   const [name, setName] = useState("");
   const [domains, setDomains] = useState([]);
   const designation = "Domain Expert";
-  const { userData, getDomainExpertByUserId,flag,getUserProfilePic} = useContext(CounsellingContext);
+  const { userData,flag,getUserProfilePic} = useContext(CounsellingContext);
 
   useEffect(() => {
     const fetchDomainExpert = async () => {
       if (userData.Id) {
         try {
-          const data = await getDomainExpertByUserId(userData.Id);
+          const data = await getTeacherByUserId(userData.Id);
+          console.log(data)
           setName(data.Name);
           setDomains(data.Domain);
           // setImageSrc(localStorage.getItem('image'))
@@ -27,7 +28,7 @@ const ExpertProfile = () => {
     // console.log(imageSrc);
     // Call the async function
     fetchDomainExpert();
-  }, [userData.Id, getDomainExpertByUserId]);
+  }, [userData.Id, getTeacherByUserId]);
   // console.log(domains)
   // useEffect(()=>{
   //   const img = localStorage.getItem('userImage')
