@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import Nav from "../common/Nav";
 
-// import './YourStylesheet.css'; // Import your CSS file
 
 function CreateEvent() {
   const [showPassword, setShowPassword] = useState(false);
@@ -60,24 +59,8 @@ function CreateEvent() {
         <label htmlFor="etime">Condunct Date</label>
         <input type="date" id="conductdate" placeholder="Enter start time" />
       </div>
-      {/* <div className="input-group">
-        
-        <div className="password-wrapper input-group">
-          <input
-            type={showPassword ? "text" : "password"}
-            id="password"
-            placeholder="Enter Password"
-          />
-          <span className="toggle-password" onClick={togglePasswordVisibility}>
-          {showPassword ? <i className="far fa-eye"></i> : <i className="far fa-eye-slash"></i>}
-          </span>
-        </div>
-      </div> */}
       <div className="input-group"></div>
       <button className="centered-button">Create</button>
-      {/* <p>
-        Already have an account? <a href="SignIn">Login here</a>
-      </p> */}
     </div>
     </React.Fragment>
   );

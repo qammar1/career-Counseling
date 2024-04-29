@@ -120,12 +120,12 @@ const Test = () => {
       console.error("Error adding interest:", error);
     }
   };
-  console.log(questions);
+  console.log(allQuestions);
   return (
     <React.Fragment>
     <Nav/>
-    <div className="add-video-card"></div>
-      <div className="background">
+    <div className="topsection"></div>
+      <div>
         <h1>Finding Interest</h1>
         {interest && <h2>{interest}</h2>}
         {loading ? (

@@ -20,6 +20,7 @@ export default function AllVideos() {
         (video) => video.Title && video.Title.toLowerCase().includes(searchTerm)
       )
     : [];
+    console.log(filteredVideos)
   // console.log(allVideos[0]);
   // console.log(allVideos)
   return (

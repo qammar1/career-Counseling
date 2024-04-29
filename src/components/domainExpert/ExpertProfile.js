@@ -29,17 +29,7 @@ const ExpertProfile = () => {
     fetchDomainExpert();
   }, [userData.Id, getDomainExpertByUserId]);
   // console.log(domains)
-  // useEffect(()=>{
-  //   const img = localStorage.getItem('userImage')
-  //   if(img!='Image not found'){
-  //     setImageSrc(img);
-  //   }
-  //   else{
-  //     setImageSrc(defaultUser)
-  //   }
-  //   console.log(img)
-  //   // console.log('heelo')
-  // },[flag])
+ 
   useEffect(() => {
     if (userData) {
         const fetchImage = async () => {

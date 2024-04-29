@@ -46,7 +46,7 @@ export const getAllDomain = async () => {
   }
 };
 export const uploadVideo = async (videoData) => {
-  // console.log(videoData)
+  console.log(videoData);
   try {
     const response = await fetch(url + 'AddVideo', {
       method: 'POST',
@@ -55,18 +55,21 @@ export const uploadVideo = async (videoData) => {
       },
       body: JSON.stringify({video: videoData}),
     });
-    
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    return response.json();
+    const responseData = await response.json(); // Read and parse JSON only once
+    console.log(responseData);                  // Log the parsed data
+
+    return responseData;                        // Return the parsed data
   } catch (error) {
     console.error('Error adding video:', error.message);
-    throw error; 
+    throw error;
   }
 };
+
 
 // teacher
 export const addTeacher = async (Teacher, userData) => {
@@ -286,8 +289,11 @@ export const getTeacherByUserId = async userId => {
   try {
     const response = await fetch(
       url + 'getTeacherByUserId?id=' + encodeURIComponent(userId),
-    );
-    const data = await response.json();
+      );
+      // console.log('hlo')
+      // console.log(userId)
+      const data = await response.json();
+      // console.log(data)
     return data;
   } catch (error) {
     console.error('Error fetching Teacher data:', error);

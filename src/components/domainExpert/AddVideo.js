@@ -32,15 +32,17 @@ const AddVideo = () => {
       Id: selectedDomain,
     },
     DomainExpert: {
-      Id: expertData.Id,
+      Id: String(expertData.Id),
     },
   };
+  console.log(expertData.Id)
   const handleUpload = async () => {
     if (!isValidYouTubeUrl(link)) {
       setFailed(true);
       return;
     }
     try {
+      console.log(videoData)
       const result = await uploadVideo(videoData);
       console.log("Video added successfully:", result);
       if (result) {

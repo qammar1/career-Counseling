@@ -12,9 +12,9 @@ export default function VideoPlayer() {
   const [modalVisible, setModalVisible] = useState(false);
   const location = useLocation();
   const { object } = location.state || {};
-  const {uploadRating } = useContext(CounsellingContext);
+  const {uploadRating,userData } = useContext(CounsellingContext);
 
-  const { name, image, link, views, description, title } = object;
+  const {vId, name, image, link, views, description, title } = object;
   const handleRatingChange = (newRating) => {
     setRating(newRating);
   };
@@ -24,36 +24,14 @@ export default function VideoPlayer() {
     setExpandDescription(!expandDescription);
   };
 
-  // Assuming `extractVideoId` and `embedUrl` logic here
-  // const sendRating = async () => {
-  //   const rate = {
-  //     rating,
-  //     feedbacks,
-  //     videoId,
-  //     // studentId: userId
-  //   };
-  //   try {
-  //     await fetch("api/rating", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(rate),
-  //     });
-  //     setRating(0);
-  //     setFeedback("");
-  //   } catch (error) {
-  //     console.error("Upload rating failed:", error);
-  //   }
-  // };
-  
   const sendRating = async () => {
     try {
       const rate = {
         rating: rating,
         feedBack: feedbacks,
-        videoId: videoId,
-        // studentId: userId,
+        videoId: vId,
+        studentId: userData.Id,
+        // console.log(videoId)
       };
 
       console.log('Rating is now' + JSON.stringify({rate}));

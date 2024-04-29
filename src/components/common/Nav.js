@@ -28,66 +28,7 @@ function Nav({ onSearch }) {
   useEffect(() => {
     setUser(userData ? userData.Role : null);
   }, [userData]);
-  // useEffect(() => {
-  //   async function checkAndFetchImage() {
-  //     console.log("called")
-  //     // let img = localStorage.getItem("userImage");
-  //     // console.log(img);
-  //     // if (img!=='Image not found' || img !=null) {
-  //     try {
-  //       const profilePic = await getUserProfilePic(userData.UserName);
-  //       console.log("updated photo is"+profilePic);
-  //       if (profilePic !== "Image not found") {
-  //         // console.log("this also called")
-  //         localStorage.setItem("userImage", profilePic);
-  //         setImage(profilePic);
-  //       } else {
-  //         localStorage.setItem("userImage", dummy);
-  //         setImage(dummy);
-  //       }
-  //     } catch (error) {
-  //       console.error("Failed to fetch user image", error);
-  //       setImage(dummy);
-  //     }
-  //     // } else {
-  //     //   setImage(dummy);
-  //     // }
-  //   }
-  //   checkAndFetchImage();
-  // }, [flag]); // Added userData to update image on user change as well.
-  // console.log(flag)
-  // useEffect(() => {
-  //   async function checkAndFetchImage() {
-  //     let img = localStorage.getItem("userImage");
-  //     // console.log(img);
-  //     if (img !== "Image not found" || img != null) {
-  //       try {
-  //         const profilePic = await getUserProfilePic(userData.UserName);
-  //         if (profilePic != "Image not found") {
-  //           localStorage.setItem("userImage", profilePic);
-  //           setImage(profilePic);
-  //         } else {
-  //           setImage(dummy);
-  //         }
-  //       } catch (error) {
-  //         console.error("Failed to fetch user image", error);
-  //         setImage(dummy);
-  //       }
-  //     } else {
-  //       setImage(dummy);
-  //     }
-  //   }
-  //   checkAndFetchImage();
-  // }, []); // Added userData to update image on user change as well.
-
-  // useEffect(() => {
-  //   const img = localStorage.getItem("userImage");
-  //   // console.log(img)
-  //   console.log(img);
-  //   if (img == "Image not found") {
-  //     setImage(dummy);
-  //   }
-  // }, []);
+ 
   
   useEffect(() => {
     if (userData) {

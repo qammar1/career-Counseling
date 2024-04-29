@@ -17,10 +17,6 @@ const SchoolProfile = () => {
     const fetchSchoolDetails = async () => {
       if (userData.Id) {
         try {
-          // const studentData = await getStudentByUserId(userData.Id);
-          // if (studentData) {
-          //   setName(studentData.Name || '');
-          // }
           const school = await getSchoolByUserId(userData.Id);
           const user = await getUserByUserId(userData.Id);
           console.log(userData)
@@ -32,11 +28,6 @@ const SchoolProfile = () => {
             setAddress(school[0].Address);
           }
           setUserName(user?.Name)
-          // if (user?.Name) {
-          //   setUserName(user[0].Name);
-          //   console.log(user.Name);
-          //   // setAddress([0].Address);
-          // }
         } catch (error) {
           console.error("Failed to fetch School details:", error);
         }

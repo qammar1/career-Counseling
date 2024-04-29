@@ -113,12 +113,18 @@ const AddTeacherScreen = ({}) => {
               placeholder="Enter Full Name"
               required
               onBlur={() => {
+                if(fullName!==''){
+
                 generateRandomPassword();
                 generateRandomUsername();
+                }else{
+                  setPassword('')
+                  setUsername('')
+                }
               }}
             />
             <label>Username:</label>
-            <input value={username} placeholder="Enter Username" readOnly />
+            <input value={username} placeholder="Enter Username" required readOnly />
             <label>Password:</label>
             <div className="password-wrapper input-group">
               <input
@@ -146,14 +152,6 @@ const AddTeacherScreen = ({}) => {
   );
 };
 
-// const styles = {
-//   container: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     padding: '20px',
-//   },
-// };
+
 
 export default AddTeacherScreen;

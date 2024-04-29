@@ -54,12 +54,8 @@
   font-weight: bold;
 }
 /* Rating */
-.rating {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.9rem;
-}
+
+
 .views {
   color: #888;
   font-size: 17px;
@@ -70,13 +66,13 @@
   align-items: center;
 }
 .stars span {
-  color: gold;
+  /* color: gold; */
   font-size: 1.5rem;
   margin-right: 2px;
 }
-.stars .filled {
+/* .stars .filled {
   color: gold
-}
+} */
 .stars .empty {
   color: #ccc;
 }
@@ -93,7 +89,7 @@
 /* p{
   margin: 0;
 } */
-.star-ratings {
+/* .star-ratings {
   float: left;
   display: block;
   unicode-bidi: bidi-override;
@@ -102,9 +98,9 @@
   height: 30px;
   position: relative;
   margin-left: 10px;
-}
+} */
 
-.star-ratings .star-ratings-top {
+/* .star-ratings .star-ratings-top {
   color: gold;
   padding: 0;
   position: absolute;
@@ -112,7 +108,7 @@
   display: block;
   left: 0px;
   overflow: hidden;
-}
+} */
 
 .star-ratings .star-ratings-bottom {
   z-index: 0;
@@ -496,9 +492,9 @@ padding-top: 7cap;
   border-radius: 10px;
  
 }
-.filled {
+/* .filled {
   color: gold;
-}
+} */
 /* Default styles for laptop and larger screens */
 .video-player iframe{
   width: 100%;
@@ -510,4 +506,43 @@ padding-top: 7cap;
   .video-player iframe{
       height: 270px; /* Specific height for mobile devices */
   }
+}
+.topsection{
+  padding-top: 5cap;
+}
+.stars span {
+  color: #ccc; /* Default color for empty stars */
+  position: relative; /* Necessary to correctly position the ::after pseudo-element */
+  display: inline-block; /* Ensure the stars are aligned properly */
+}
+
+.filled, .filled-three-quarters, .filled-half, .filled-quarter {
+  color: gold !important; /* Filled star color */
+}
+
+.filled-three-quarters::after, .filled-half::after, .filled-quarter::after {
+  content: "★";
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ccc; /* Correct this to be gray, so the non-filled part appears gray */
+  width: 100%;
+  height: 100%;
+}
+
+.filled-three-quarters::after {
+  clip-path: inset(0 0  0 65%); /* Covers 75% of the star */
+}
+
+.filled-half::after {
+  clip-path: inset(0 0  0 50%); /* Covers half of the star */
+}
+
+.filled-quarter::after {
+  clip-path: inset(0 0 0 40%); /* Covers 25% of the star */
+}
+
+.rating {
+  display: flex;
+  justify-content: space-between;
 }

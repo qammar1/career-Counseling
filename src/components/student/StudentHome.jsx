@@ -5,7 +5,7 @@ export default function StudentHome() {
   return (
     <React.Fragment>
       <Nav />
-      <div>StudentHome</div>
+      <div className="topsection">StudentHome</div>
     </React.Fragment>
   );
 }
