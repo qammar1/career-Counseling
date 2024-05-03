@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { CounsellingContext } from "../../Context/ContextApi";
 
 export default function SgnIn () {
@@ -47,8 +47,11 @@ export default function SgnIn () {
       // console.log("not found");
     }
   };
+
+ 
   return (
     <React.Fragment>
+    <div className="parent-card">
       <div className="card">
         <h2>Log In</h2>
         <form onSubmit={clickSignIn}>
@@ -97,6 +100,7 @@ export default function SgnIn () {
           Don't have an account? <Link to="/options">Sign up</Link>
         </p>
       </div>
+    </div>
     </React.Fragment>
   );
           }

@@ -29,7 +29,7 @@ const ExpertSetting = () => {
       }
     };
     fetchDomainExpert();
-  }, [userData.Id, getDomainExpertByUserId, getUserProfilePic]);
+  }, [userData.Id, getUserProfilePic]);
 
   const handleImageUpload = async (event) => {
     if (event.target.files && event.target.files[0]) {

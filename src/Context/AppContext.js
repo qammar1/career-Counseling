@@ -1,4 +1,4 @@
-var url = "http://192.168.0.104/CareerCounselligBackend/api/careercounselling/";
+var url = "http://192.168.0.105/CareerCounselligBackend/api/careercounselling/";
 
 // // signup domain expert
 export const addDomainExpert = async (domainExpert, userData, domainId) => {
@@ -290,12 +290,53 @@ export const getTeacherByUserId = async userId => {
     const response = await fetch(
       url + 'getTeacherByUserId?id=' + encodeURIComponent(userId),
       );
-      // console.log('hlo')
-      // console.log(userId)
       const data = await response.json();
-      // console.log(data)
     return data;
   } catch (error) {
     console.error('Error fetching Teacher data:', error);
+  }
+};
+
+// GET ALL DOMAIN EXPERTs
+export const getAllDomainExperts = async () => {
+  try {
+    var res = await fetch(
+      url + 'getAllDomainExpert',
+    );
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    var data = await res.json();
+    // console.log(data)
+    return data; // Return the data
+  } catch (error) {
+    console.log('Error in getting Domain experts', error);
+    throw error;
+  }
+  // return ("hello")
+};
+// uploadEvent
+export const createEvent = async eventData => {
+  console.log(JSON.stringify({event: eventData}));
+  try {
+    const response = await fetch(url + 'AddEvent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({event: eventData}),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Error adding Event:', error.message);
+    // Handle the error here
+    throw error; // Rethrow the error if needed
   }
 };

@@ -161,7 +161,7 @@
   }
   @media only screen and (max-width: 426px) {
     .card {
-      height: 85vh;
+      /* height: 85vh; */
       width: 72%;
       border: none;
       overflow: hidden;
@@ -178,4 +178,8 @@ flex-direction: column;
       padding: 10px;
       height: 66px;
     }
+  }
+  .parent-card{
+    /* display: flex; */
+    padding-top: 10vh;
   }

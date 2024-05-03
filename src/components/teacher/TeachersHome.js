@@ -5,7 +5,7 @@ export default function TeachersHome() {
     <React.Fragment>
     <Nav/>
     <div className='topsection'></div>
-    <div>TeachersHomeall the way from londoen</div>
+    <div>TeachersHome</div>
 
     </React.Fragment>
   )

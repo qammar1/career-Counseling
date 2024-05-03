@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import img from '../components/common/user.png'
 const CounsellingContext = React.createContext();
-var url = "http://192.168.0.104/CareerCounselligBackend/api/careercounselling/";
+var url = "http://192.168.0.105/CareerCounselligBackend/api/careercounselling/";
 function DataProvider({ children }) {
   const [userData, setUserData] = useState({});
    const [flag, setFlag] = useState(true);
@@ -54,7 +54,7 @@ function DataProvider({ children }) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
       var data = await res.json();
-      console.log(data)
+      // console.log(data)
       setAllVideos(data);
       return data;
     } catch (error) {
@@ -70,16 +70,6 @@ function DataProvider({ children }) {
       setExpertData(data);
     }
   };
-  //GET USER DATA
-
-
-  
-
-  
-  
- 
-  
-
   
   //GET USER PROFILE PIC
 const getUserById = async id => {
@@ -112,14 +102,13 @@ const getUserById = async id => {
           const response = await fetch(`${url}uploadImage`, {
             method: "POST",
             body: formData,
-            // headers: { /* if required */ }
           });
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           const result = await response.json();
           setFlag(!flag)
-          console.log("Success:", result);
+          // console.log("Success:", result);
           return true;
         } catch (error) {
           console.error("Upload error:", error.message);
@@ -128,24 +117,29 @@ const getUserById = async id => {
       };
     
       const getUserProfilePic = async (imageName) => {
-        try {
-          // console.log(imageName)
-          const response = await fetch(`${url}SearchImage?imageName=${encodeURIComponent(imageName)}`);
-          const data = await response.json();
-          if(data){
-
-            return data;
-          }else{
-            
+        if(imageName){
+          try {
+           
+            const response = await fetch(`${url}SearchImage?imageName=${encodeURIComponent(imageName)}`);
+            if (!response.ok) {
+              return null;  // or any other appropriate value or action
           }
-        } catch (error) {
-          // console.error("Error fetching user profile pic:", error);
-          // throw error;
+            const data = await response.json();
+            if(data){
+              return data;
+            }else{
+              return null;
+            }
+          } catch (error) {
+            return null;
+            // console.error("Error fetching user profile pic:", error);
+            // throw error;
+          }
         }
       };
       const uploadRating = async (ratingData) => {
-        console.log('Rating data:', ratingData);
-        console.log('Sending rating...');
+        // console.log('Rating data:', ratingData);
+        // console.log('Sending rating...');
     
         try {
             const response = await fetch(url + 'saveRating', {
@@ -161,7 +155,7 @@ const getUserById = async id => {
             }
     
             const responseData = await response.json(); // Read the response data only once
-            console.log('Rating response:', responseData);
+            // console.log('Rating response:', responseData);
             return responseData;
         } catch (error) {
             console.error('Error adding rating:', error.message);
@@ -195,4 +189,3 @@ const getUserById = async id => {
 }
 const DataConsumer = CounsellingContext.Consumer;
 export { DataProvider, DataConsumer, CounsellingContext };
-

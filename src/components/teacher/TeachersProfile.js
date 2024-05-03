@@ -17,7 +17,7 @@ const TeachersProfile = () => {
       if (userData?.Id) {
         try {
           const data = await getTeacherByUserId(userData.Id);
-          console.log(data[0]);  // Log the first item from the fetched data
+          // console.log(data[0]);  // Log the first item from the fetched data
           setName(data[0].TeacherName);
           setSchool(data[0].SchoolName);
         } catch (error) {

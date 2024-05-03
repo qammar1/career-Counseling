@@ -19,12 +19,12 @@ const SchoolProfile = () => {
         try {
           const school = await getSchoolByUserId(userData.Id);
           const user = await getUserByUserId(userData.Id);
-          console.log(userData)
-          console.log(user)
-          console.log(school)
+          // console.log(userData)
+          // console.log(user)
+          // console.log(school)
           if (school[0]?.Name) {
             setSchoolName(school[0].Name);
-            console.log(school[0].Name);
+            // console.log(school[0].Name);
             setAddress(school[0].Address);
           }
           setUserName(user?.Name)

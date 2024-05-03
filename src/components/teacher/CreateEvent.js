@@ -1,67 +1,88 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import Nav from "../common/Nav";
-
+import { getAllDomainExperts, createEvent } from "../../Context/AppContext";
 
 function CreateEvent() {
-  const [showPassword, setShowPassword] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [group, setGroup] = useState("");
+  const [guest, setGuest] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [conductDate, setConductDate] = useState("");
+  const [allDomainExperts, setAllDomainExperts] = useState([]);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  useEffect(() => {
+    const getDomainExperts = async () => {
+      const expertsList = await getAllDomainExperts();
+      setAllDomainExperts(expertsList);
+    };
+    getDomainExperts();
+  }, []);
+
+  const handleCreateEvent = async () => {
+    console.log(title, description, group, guest, startTime, endTime, conductDate);
+    const eventData = {
+      Title: title,
+      Description: description,
+      StartTime: startTime,
+      EndTime: endTime,
+      Conducted: false,
+      ConductDate: conductDate,
+      Groups: { Id: group },
+      DomainExpertId: guest, // Assuming this should be the selected expert's ID
+    };
+    const response = await createEvent(eventData);
   };
 
   return (
     <React.Fragment>
-<Nav/>
-<div className="add-video-card"></div>
-    <div className="cardSignUp">
-      <h2>Create Event</h2>
-      <div className="input-group">
-        <label htmlFor="name">Title</label>
-        <input type="text" id="title" placeholder="Enter Title" />
-      </div>
-      <div className="input-group">
-        <label htmlFor="email">Description</label>
-        <input
-          type="text"
-          id="description"
-          placeholder="Enter Short description"
-        />
-      </div>
-      <div className="input-group">
-        <label htmlFor="email">Domain</label>
-        <input
-          type="text"
-          id="description"
-          placeholder="Enter Domain"
-        />
-      </div>
-      <div className="input-group">
-        <label htmlFor="email">Guest</label>
-        <input
-          type="text"
-          id="description"
-          placeholder="Enter guest name"
-        />
-      </div>
-      <div className="time">
-        <div className="input-group">
-          <label htmlFor="stime">Start Time</label>
-          <input type="time" id="phone" placeholder="Enter start time" />
-        </div>
-        <div className="input-group">
-          <label htmlFor="etime">End Time</label>
+      <Nav />
+      <div className="add-video-card">
 
-          <input type="time" id="phone" placeholder="Enter start time" />
+      <div className="cardSignUp">
+        <h2>Create Event</h2>
+        <div className="input-group">
+          <label htmlFor="title">Title</label>
+          <input type="text" id="title" placeholder="Enter Title" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
+        <div className="input-group">
+          <label htmlFor="description">Description</label>
+          <input type="text" id="description" placeholder="Enter Short description" value={description} onChange={(e) => setDescription(e.target.value)} />
+        </div>
+        <div className="input-group">
+          <label htmlFor="group">Group</label>
+          <input type="text" id="group" placeholder="Enter Group" value={group} onChange={(e) => setGroup(e.target.value)} />
+        </div>
+        <div className="input-group">
+          <label htmlFor="guest">Guest</label>
+          <select id="guest" value={guest} onChange={(e) => setGuest(e.target.value)}>
+            <option value="">Select a Guest</option>
+            {allDomainExperts.map((expert) => (
+              <option key={expert.Id} value={expert.Id}>
+                {expert.Name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="time">
+          <div className="input-group">
+            <label htmlFor="startTime">Start Time</label>
+            <input type="time" id="startTime" placeholder="Enter start time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+          </div>
+          <div className="input-group">
+            <label htmlFor="endTime">End Time</label>
+            <input type="time" id="endTime" placeholder="Enter end time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+          </div>
+        </div>
+        <div className="input-group">
+          <label htmlFor="conductDate">Conduct Date</label>
+          <input type="date" id="conductDate" placeholder="Enter conduct date" value={conductDate} onChange={(e) => setConductDate(e.target.value)} />
+        </div>
+        <button onClick={handleCreateEvent} className="centered-button">Create</button>
       </div>
-      <div className="input-group">
-        <label htmlFor="etime">Condunct Date</label>
-        <input type="date" id="conductdate" placeholder="Enter start time" />
       </div>
-      <div className="input-group"></div>
-      <button className="centered-button">Create</button>
-    </div>
     </React.Fragment>
   );
 }

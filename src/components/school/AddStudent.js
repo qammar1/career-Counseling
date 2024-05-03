@@ -1,32 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Nav from "../common/Nav";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { getAllUsername, addStudent } from "../../Context/AppContext";
+import { getAllUsername, addStudent,getSchoolByUserId } from "../../Context/AppContext";
+import { CounsellingContext } from "../../Context/ContextApi";
 function AddStudent() {
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernames, setUsernames] = useState([]);
+  const [schoolId,setSchoolId] = useState('')
   const [phone, setPhone] = useState("");
   const classes = ["6th", "7th", "8th"];
   const [showPassword, setShowPassword] = useState(false);
   const [selectedClass, setSelectedClass] = useState("");
-  const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
-
-  // const [studentClass, setStudentClass] = useState('');
-  // const [fullName, setFullName] = useState('');
-  // const [usernames, setUsernames] = useState([]);
-  // const [name, setName] = useState("");
-  // const [userName, setUserName] = useState("");
-  // const [password, setPassword] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  
+const {userData} = useContext(CounsellingContext);
+console.log(userData);
 
   const getUsernames = async () => {
     try {
       const data = await getAllUsername();
       if (data != null) {
         setUsernames(data);
-
-        // console.log(data);
       }
     } catch (error) {
       console.error(error);
@@ -42,6 +38,12 @@ function AddStudent() {
     } while (usernames.includes(newUsername));
     setUsername(newUsername);
   };
+  const getSchool = async()=>{
+    const schol = await getSchoolByUserId(userData.Id);
+    setSchoolId(schol[0].Id);
+    // console.log(schol[0].Id)
+  }
+  
 
   const generateRandomPassword = () => {
     const nameParts = fullName.split(" ")[0];
@@ -55,6 +57,7 @@ function AddStudent() {
 
   useEffect(() => {
     getUsernames();
+    getSchool();
   }, []);
 
   //password visibility
@@ -62,34 +65,30 @@ function AddStudent() {
     setShowPassword(!showPassword);
   };
 
+  const Student = {
+    Name: fullName,
+    Class: selectedClass,
+    IsNew: true,
+    School: {
+      Id: schoolId,
+    },
+  };
+  const UserData = {
+    Name: fullName,
+    UserName: username,
+    Password: password,
+  };
+
   // handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    // const result = await addDomainExpert(DomainExpert, UserData, domainId);
-    // if (result) {
-    //   setIsSignUpSuccess(true);
-    //   resetFields();
-    //   setTimeout(() => setIsSignUpSuccess(false), 3000);
-    // }
-
-    const Student = {
-      Name: fullName,
-      Class: selectedClass,
-      IsNew: true,
-      School: {
-        // Id: schoolId,
-      },
-    };
-
-    const UserData = {
-      Name: fullName,
-      UserName: username,
-      Password: password,
-    };
-    console.log(Student, UserData);
     try {
       const result = await addStudent(Student, UserData);
+       if (result) {
+      setIsSuccess(true);
+      setTimeout(() => setIsSuccess(false), 3000);
+    }
+
       // Reset the input fields
       setFullName("");
       setUsername("");
@@ -99,15 +98,13 @@ function AddStudent() {
     } catch (error) {
       console.error("Error in Adding Student:", error.message);
     }
-
-    // } catch (error) {
-    //   console.error("Error in SignUp:", error.message);
-    // }
   };
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
   return (
     <React.Fragment>
       <Nav />
+      <div className="parent-card">
+
       <div className="add-video-card">
         <div className="cardSignUp">
           <h2 className="signh2">Add Student</h2>
@@ -122,8 +119,10 @@ function AddStudent() {
                 onChange={(e) => setFullName(e.target.value)}
                 required
                 onBlur={() => {
+                  if(fullName!=''){
                   generateRandomPassword();
                   generateRandomUsername();
+                  }
                 }}
               />
             </div>
@@ -205,8 +204,8 @@ function AddStudent() {
                 ))}
               </select>
             </div>
-            {isSignUpSuccess && (
-              <p className="signup-success">Added successfully!</p>
+            {isSuccess && (
+              <p className="signup-success">Student Added successfully!</p>
             )}
             <button type="submit" className="centered-button">
               ADD
@@ -216,6 +215,7 @@ function AddStudent() {
         Already have an account? <a href="/SignIn">Login here</a>
       </p> */}
         </div>
+      </div>
       </div>
     </React.Fragment>
   );

@@ -15,7 +15,7 @@ const VideoCard = ({ video }) => {
 
   useEffect(() => {
     setName(video.DomainExpert);
-    console.log(video);
+    // console.log(video);
   }, []);
 
   const object = {
@@ -28,10 +28,11 @@ const VideoCard = ({ video }) => {
     title: video.Title,
     image: imageSrc,
   };
+  // console.log(video.DomainExpert.Users)
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        console.log(video);
+        // console.log(video);
         const image = await getUserProfilePic(
           video.DomainExpert.Users.UserName
         );
@@ -96,32 +97,34 @@ const VideoCard = ({ video }) => {
           <div className="views"> {views} views</div>
         </div> */}
         {/* <div className="rating"> */}
-          <div className="rating">
-            <div className="stars">
+        <div className="rating">
+          <div className="stars">
             {[...Array(5)].map((_, index) => {
-      let className = "empty"; // Start with the default class as empty
-      if (index + 1 <= Math.floor(video.Rating)) {
-        // Full star if the index is less than the floor of the rating
-        className = "filled";
-      } else if (index === Math.floor(video.Rating)) {
-        // Determine the class for partial stars based on the fractional part
-        const fractionalPart = video.Rating - Math.floor(video.Rating);
-        if (fractionalPart >= 0.75) {
-          className = "filled-three-quarters";
-        } else if (fractionalPart >= 0.5) {
-          className = "filled-half";
-        } else if (fractionalPart >= 0.25) {
-          className = "filled-quarter";
-        }
-      }
-      return <span key={index} className={className}>★</span>;
-    })}
-              <p className="rating-num">{video.Rating  || 0}</p>
-            </div>
-
-            <div className="views">{views} views</div>
+              let className = "empty"; 
+              if (index + 1 <= Math.floor(video.Rating)) {
+                className = "filled";
+              } else if (index === Math.floor(video.Rating)) {
+                const fractionalPart = video.Rating - Math.floor(video.Rating);
+                if (fractionalPart >= 0.75) {
+                  className = "filled-three-quarters";
+                } else if (fractionalPart >= 0.5) {
+                  className = "filled-half";
+                } else if (fractionalPart >= 0.25) {
+                  className = "filled-quarter";
+                }
+              }
+              return (
+                <span key={index} className={className}>
+                  ★
+                </span>
+              );
+            })}
+            <p className="rating-num">{video.Rating || 0}</p>
           </div>
-          
+
+          <div className="views">{views} views</div>
+        </div>
+
         {/* </div> */}
       </div>
     </div>

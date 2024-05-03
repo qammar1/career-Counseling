@@ -14,9 +14,6 @@ import { BrowserRouter as Router,Route,Routes } from 'react-router-dom';
 import AllVideos from './components/domainExpert/AllVideos';
 import ExpertHome from './components/domainExpert/ExpertHome';
 import AllEvents from './components/teacher/AllEvents';
-// import TeacherProfile from './components/teacher/TeacherProfile';
-// import TeacherHome from './components/teacher/TeacherHome'
-// import teacherHome from "./components/teacher/TeacherHome";
 import TeacherSetting from './components/teacher/TeacherSetting'
 import TeachersHome from "./components/teacher/TeachersHome";
 import TeachersProfile from "./components/teacher/TeachersProfile";

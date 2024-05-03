@@ -19,7 +19,6 @@ const ExpertProfile = () => {
       if (userData?.Id) {
         try {
           const data = await getTeacherByUserId(userData.Id);
-          console.log(data[0])
           
           setUserName(userData.UserName);
           setName(data[0].TeacherName);

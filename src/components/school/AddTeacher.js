@@ -1,78 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Nav from "../common/Nav";
 import { addTeacher,getAllUsername } from "../../Context/AppContext";
-const AddTeacherScreen = ({}) => {
+import { getSchoolByUserId } from "../../Context/AppContext";
+import { CounsellingContext } from "../../Context/ContextApi";
+const AddTeacherScreen = () => {
+
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [schoolId, setSchoolId] = useState('');
   const [usernames, setUsernames] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleAddTeacher = async () => {
-    // Your API endpoint for adding a teacher
-    // const apiUrl = "your_api_endpoint_here";
+  const { userData } = useContext(CounsellingContext);
 
-    const schoolId = localStorage.getItem("SchoolId");
-
-    const Teacher = {
-      Name: fullName,
-      School: {
-        Id: schoolId,
-      },
+  useEffect(() => {
+    const fetchData = async () => {
+      await getUsernames();
+      await getSchool();
     };
+    fetchData();
+  }, []);
 
-    const UserData = {
-      Name: fullName,
-      UserName: username,
-      Password: password,
-    };
-
-    console.log("Adding Teacher:", { Teacher, UserData });
-    try {
-      const result = await addTeacher(Teacher, UserData);
-      // ToastAndroid.show(result, ToastAndroid.SHORT);
-      // Reset the input fields
-      setFullName("");
-      setUsername("");
-      setPassword("");
-      console.log("API Response:", result);
-    } catch (error) {
-      console.error("Error in Adding Teacher:", error.message);
-    }
-
-    // try {
-    //   const response = await fetch(apiUrl, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ Teacher, UserData }),
-    //   });
-    //   const result = await response.text();
-    //   alert(result);
-    //   setFullName('');
-    //   setUsername('');
-    //   setPassword('');
-    // } catch (error) {
-    //   console.error('Error in Adding Teacher:', error.message);
-    // }
+  const getSchool = async () => {
+    const school = await getSchoolByUserId(userData.Id);
+    setSchoolId(school[0].Id);
   };
 
-  // const getUsernames = async () => {
-  //   try {
-  //     // Your API endpoint for getting all usernames
-  //     const apiUrl = "your_api_endpoint_here";
-  //     const response = await fetch(apiUrl);
-  //     const data = await response.json();
-  //     if (data != null) {
-  //       setUsernames(data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const getUsernames = async () => {
+    try {
+      const data = await getAllUsername();
+      setUsernames(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const generateRandomUsername = () => {
+    if (!fullName) {
+      setUsername('');
+      return;
+    }
     const FullName = fullName.replace(/\s+/g, "_");
     let newUsername = "";
     do {
@@ -83,6 +53,10 @@ const AddTeacherScreen = ({}) => {
   };
 
   const generateRandomPassword = () => {
+    if (!fullName) {
+      setPassword('');
+      return;
+    }
     const nameParts = fullName.split(" ")[0];
     let newPassword = "";
     do {
@@ -92,16 +66,37 @@ const AddTeacherScreen = ({}) => {
     setPassword(newPassword);
   };
 
-  useEffect(() => {
-    getAllUsername();
-  }, []);
-  console.log(password);
+  const handleAddTeacher = async () => {
+    if (!fullName || !username || !password) {
+      setError('Enter Full Name');
+      setTimeout(() => setError(''), 3000);
+      return;
+    }
+    setError('');
+    try {
+      const result = await addTeacher({ Name: fullName, School: { Id: schoolId } }, { Name: fullName, UserName: username, Password: password });
+      if (result) {
+        setIsSuccess(true);
+        setTimeout(() => setIsSuccess(false), 3000);
+        setFullName("");
+        setUsername("");
+        setPassword("");
+      }
+      console.log("API Response:", result);
+    } catch (error) {
+      console.error("Error in Adding Teacher:", error.message);
+      setError(error.message);
+    }
+  };
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
   return (
     <React.Fragment>
       <Nav />
+      <div className="parent-card">
+
       <div className="add-video-card">
         <div className="card">
           <h2>Add Teacher</h2>
@@ -144,9 +139,14 @@ const AddTeacherScreen = ({}) => {
                 )}
               </span>
             </div>
+            {error && <p  style={{color:'red'}}>{error}</p>}
+            {isSuccess && (
+              <p className="signup-success">Teacher Added successfully!</p>
+            )}
             <button onClick={handleAddTeacher}>Add</button>
           </div>
         </div>
+      </div>
       </div>
     </React.Fragment>
   );

@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { CounsellingContext } from "../../Context/ContextApi";
 import { Link } from "react-router-dom";
-
+import { getFeedbackOnVideo } from "../../Context/AppContext";
 export default function VideoPlayer() {
   const [expandDescription, setExpandDescription] = useState(false);
-  const [feedbacks, setFeedback] = useState("");
+  const [feedback, setFeedback] = useState("");
   const [allFeedback, setAllFeedback] = useState([]);
   const [rating, setRating] = useState(0);
   // const [imagePath, setImagePath] = useState("/defaultUser.png");
@@ -18,20 +18,23 @@ export default function VideoPlayer() {
   const handleRatingChange = (newRating) => {
     setRating(newRating);
   };
-// console.log(name.Users.Name)
-  // console.log(rating, feedbacks);
   const handleDescriptionToggle = () => {
     setExpandDescription(!expandDescription);
   };
-
+  const getFeedbacks = async ()=>{
+    const feedbacks = await getFeedbackOnVideo(vId);
+  if (feedbacks != null) {
+    console.log('feedback :: ' + feedbacks);
+    setAllFeedback(feedbacks);
+  }
+  }
   const sendRating = async () => {
     try {
       const rate = {
         rating: rating,
-        feedBack: feedbacks,
+        feedBack: feedback,
         videoId: vId,
         studentId: userData.Id,
-        // console.log(videoId)
       };
 
       console.log('Rating is now' + JSON.stringify({rate}));
@@ -39,16 +42,15 @@ export default function VideoPlayer() {
       await uploadRating(rate);
       setRating(0);
       setFeedback('');
+      getFeedbacks();
     } catch (error) {
-      // Handle errors, if any, during the removal of user data
       console.log('Upload rating failed:', error);
     }
-
-    // You can perform any additional actions based on the new rating here
   };
 
+  
   // New function to extract video ID from both types of URLs
-
+// console.log(allFeedback)
   const extractVideoId = (url) => {
     let videoId = null;
     if (url.includes("youtu.be")) {
@@ -80,6 +82,10 @@ export default function VideoPlayer() {
   const handleClick = (index) => {
     handleRatingChange(index);
   };
+
+   useEffect(()=>{
+    getFeedbacks();
+  },[])
   return (
     <div className="video-player">
       <iframe
@@ -111,14 +117,16 @@ export default function VideoPlayer() {
       </div>
 
         <div className="feedback-section">
-          <h2>Feedback ({allFeedback.length})</h2>
+          <h2>{allFeedback.length || 0} Feedbacks</h2>
           <div>
-            {allFeedback.map((item, index) => (
-              <div key={index} className="feedback-item">
-                <p className="feedback-student-name">{item.Name}:</p>
-                <p className="feedback-text">{item.FeedBack}</p>
-              </div>
-            ))}
+          {allFeedback.map((item, index) => (
+  item.Name || item.FeedBack && (
+    <div key={index} className="feedback-main">
+      <p className="feedback-name">@{item.Name || `Name`}</p>
+      <p className="feedback-text">{item.FeedBack || `Positive point of view`}</p>
+    </div>
+  )
+))}
           </div>
         </div>
       </div>
@@ -153,7 +161,7 @@ export default function VideoPlayer() {
               })}
             </div>
             <textarea
-              value={feedbacks}
+              value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
               placeholder="Share your thoughts"
             ></textarea>

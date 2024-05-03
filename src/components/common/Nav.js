@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CounsellingContext } from "../../Context/ContextApi";
 import dummy from "./user.png";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 function Nav({ onSearch }) {
   const [isOpen, setIsOpen] = useState(false);
   const [image, setUserImage] = useState(dummy);
@@ -12,7 +12,9 @@ function Nav({ onSearch }) {
   const hideButton = () => {
     setIsOpen(!isOpen);
   };
+  // const navigate = useNavigate();
   const signOut = () => {
+    // navigate('/signIn', { replace: true });
     setIsOpen(!isOpen);
     localStorage.removeItem("userData");
     localStorage.removeItem("userImage");
@@ -105,7 +107,7 @@ function Nav({ onSearch }) {
           ) : null}
           {user === "Student" ? (
             <div className="addVideobtn">
-              <Link to="/interestVideos">
+              <Link to="/allVideos">
                 <i className="fas fa-video"></i>
               </Link>
               <Link to="/studentProfile">

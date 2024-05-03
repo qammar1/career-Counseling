@@ -23,7 +23,7 @@ const AddVideo = () => {
       setSelectedDomain("");
     };
 
-  const { expertData } = useContext(CounsellingContext);
+  const { userData } = useContext(CounsellingContext);
   const videoData = {
     Link: link,
     Title: title,
@@ -32,10 +32,10 @@ const AddVideo = () => {
       Id: selectedDomain,
     },
     DomainExpert: {
-      Id: String(expertData.Id),
+      Id: String(userData.Id),
     },
   };
-  console.log(expertData.Id)
+  // console.log(expertData.Id)
   const handleUpload = async () => {
     if (!isValidYouTubeUrl(link)) {
       setFailed(true);

@@ -27,7 +27,7 @@ const ExpertProfile = () => {
     // console.log(imageSrc);
     // Call the async function
     fetchDomainExpert();
-  }, [userData.Id, getDomainExpertByUserId]);
+  }, [userData.Id]);
   // console.log(domains)
  
   useEffect(() => {
