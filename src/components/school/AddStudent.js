@@ -38,12 +38,18 @@ console.log(userData);
     } while (usernames.includes(newUsername));
     setUsername(newUsername);
   };
+  console.log(userData.Id)
   const getSchool = async()=>{
-    const schol = await getSchoolByUserId(userData.Id);
-    setSchoolId(schol[0].Id);
-    // console.log(schol[0].Id)
+    try{
+      const schol = await getSchoolByUserId(userData.Id);
+      console.log(schol)
+      setSchoolId(schol[0].Id);
+    }
+    catch(error)
+    {
+    console.log(error);
   }
-  
+}
 
   const generateRandomPassword = () => {
     const nameParts = fullName.split(" ")[0];

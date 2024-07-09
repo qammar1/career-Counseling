@@ -37,7 +37,8 @@ const ExpertProfile = () => {
       if (userData?.UserName) {
         try {
           const profilePic = await getUserProfilePic(userData.UserName);
-          setImageSrc(profilePic !== 'Image not found' ? profilePic : defaultUser);
+          console.log(profilePic)
+          setImageSrc(profilePic !== 'Image not found' || null ? profilePic : defaultUser);
         } catch (error) {
           console.error('Failed to fetch user image', error);
           setImageSrc(defaultUser);
@@ -47,6 +48,7 @@ const ExpertProfile = () => {
 
     fetchImage();
   }, [userData, getUserProfilePic]);
+  console.log(imageSrc)
   const handleImageUpload = async (event) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -101,6 +103,12 @@ const ExpertProfile = () => {
           <div className="about">
             <div className="head">School</div>
             <div className="detail">{school}</div>
+          </div>
+          <div className='changePassword'>
+            <Link to='/changePassword'><span>Change Password</span></Link>
+          </div>
+          <div className='changePassword'>
+            <Link to='/privacyPolicy'><span>Privacy Policy</span></Link>
           </div>
         </div>
       </div>

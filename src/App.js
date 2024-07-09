@@ -32,6 +32,16 @@ import InterestVideos from "./components/student/InterestVideos";
 import ExpertSetting from "./components/domainExpert/ExpertSetting";
 import Test from "./components/student/Test";
 import StudentSetting from "./components/student/StudentSetting";
+// import AllStundents from "./components/school/AllStudents";
+// import AllTeachers from "./components/school/AllTeachers";
+import ChangePassword from "./components/common/ChangePassword";
+import TeacherQuestions from "./components/teacher/TeacherQuestions";
+import PrivacyPolicy from "./components/common/PrivaryPolicy";
+import StudentDetail from "./components/school/StudentDetail";
+import AllStudents from "./components/school/AllStudents";
+import TeacherDetail from "./components/school/TeacherDetail";
+import InitialQuestions from './components/student/InitialQuestions'
+import AddQuestion from "./components/teacher/AddQuestion";
 // import './App.css'
 export default function App() {
   return (
@@ -45,6 +55,8 @@ export default function App() {
             <Route path="/options" element=<Options />></Route>
             <Route path="/videoPlayer" element=<VideoPlayer />></Route>
             <Route path="/signUpSchool" element=<SignUpSchool />></Route>
+            <Route path="/changePassword" element=<ChangePassword />></Route>
+            <Route path="/privacyPolicy" element=<PrivacyPolicy />></Route>
             {/* <Route path="/signUp" element=<SignUp />></Route> */}
             {/* expert side */}
             <Route path="/allvideos" element=<AllVideos />></Route>
@@ -59,12 +71,15 @@ export default function App() {
             <Route path="/teacherHome" element=<TeachersHome />></Route>
             <Route path="/createEvent" element=<CreateEvent />></Route>
             <Route path="/teacherSetting" element=<TeacherSetting />></Route>
+            <Route path="/teacherQuestions" element=<TeacherQuestions />></Route>
+            <Route path="/addQuestion" element=<AddQuestion />></Route>
             {/* //student side */}
             <Route path="/studentProfile" element=<StudentProfile />></Route>
             <Route path="/studentSetting" element=<StudentSetting />></Route>
             <Route path="/studentHome" element=<StudentHome />></Route>
             <Route path="/interestVideos" element=<InterestVideos />></Route>
             <Route path="/test" element=<Test />></Route>
+            <Route path="/initialQuestions" element=<InitialQuestions/>></Route>
 
             {/* //school Side */}
             <Route path="/schoolProfile" element=<SchoolProfile/>></Route>
@@ -72,6 +87,11 @@ export default function App() {
             <Route path="/addTeacher" element=<AddTeacher />></Route>
             <Route path="/addStudent" element=<AddStudent/>></Route>
             <Route path="/schoolSetting" element=<SchoolSetting/>></Route>
+            <Route path="/studentDetail" element=<StudentDetail />></Route>
+            <Route path="/allStudents" element=<AllStudents />></Route>
+            <Route path="/teacherDetail" element=<TeacherDetail />></Route>
+            {/* <Route path="/allTeachers" element=<AllStundents/>></Route> */}
+            {/* <Route path="/allStudents" element=<AllTeachers/>></Route> */}
 
           </Routes>
         </Router> 

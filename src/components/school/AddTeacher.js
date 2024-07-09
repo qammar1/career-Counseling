@@ -25,8 +25,13 @@ const AddTeacherScreen = () => {
   }, []);
 
   const getSchool = async () => {
-    const school = await getSchoolByUserId(userData.Id);
-    setSchoolId(school[0].Id);
+    try{  
+      const school = await getSchoolByUserId(userData.Id);
+      setSchoolId(school[0].Id);
+    }
+    catch(error){
+      console.log(error)
+    }
   };
 
   const getUsernames = async () => {

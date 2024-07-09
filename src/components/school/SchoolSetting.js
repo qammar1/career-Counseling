@@ -3,6 +3,8 @@ import dummy from '../common/user.png';
 import Nav from '../common/Nav';
 import { CounsellingContext } from '../../Context/ContextApi';
 import { getSchoolByUserId, getUserByUserId } from '../../Context/AppContext';
+import { Link } from 'react-router-dom';
+import ChangePassword from '../common/ChangePassword';
 
 const SchoolSetting = () => {
   const [imageSrc, setImageSrc] = useState(dummy);
@@ -100,6 +102,9 @@ const SchoolSetting = () => {
             <div className="detail">{schoolName || "Name not available"}</div>
             <div className="head">Address</div>
             <div className="detail">{address || "Address not found"}</div>
+          </div>
+          <div className='changePassword'>
+            <Link to='/changePassword'><span>Change Password</span></Link>
           </div>
         </div>
       </div>

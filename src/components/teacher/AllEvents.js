@@ -1,26 +1,38 @@
-import React, { useState } from "react";
+import React,{useState,useEffect} from "react";
 import SingleEvent from "./SingleEvent";
 import Nav from "../common/Nav";
+import { getAllEvents } from "../../Context/AppContext";
 
 export default function AllEvents() {
-  const [arr, setarr] = useState([1, 2, 34, 45, 5, 6, 4, 2, 53, 23]);
+const [allEvents,setAllEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        // console.log(video);
+        const event = await getAllEvents();
+        // const eventData = JSON.parse(event);
+
+        console.log(event)
+        setAllEvents(event)
+        
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+        
+      }
+    };
+    fetchEvents();
+  }, []);
+
   return (
     <React.Fragment>
       <Nav />
       <div className="teacherHomeMain">
         <h2>Up Comming Events</h2>
         <div className="allEvents">
-          {arr.map((e, index) => (
+          {allEvents.map((item, index) => (
             <div key={index}>
-              <SingleEvent />
-            </div>
-          ))}
-        </div>
-        <h2>Previous Events</h2>
-        <div className="allEvents">
-          {arr.map((e, index) => (
-            <div key={index}>
-              <SingleEvent />
+              <SingleEvent e={item}/>
             </div>
           ))}
         </div>

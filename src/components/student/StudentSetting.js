@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import defaultUser from "../common/user.png";
 import Nav from "../common/Nav";
 import { CounsellingContext } from "../../Context/ContextApi";
-
+import { Link } from "react-router-dom";
+import { getInterestByStudentId } from "../../Context/AppContext";
 const StudentSetting = () => {
   const [imageSrc, setImageSrc] = useState(defaultUser);
   const [name, setName] = useState("");
@@ -20,6 +21,10 @@ const StudentSetting = () => {
         if (data[0]?.StudentName) {
           setName(data[0].StudentName);
         }
+        const interestsData = await getInterestByStudentId(data[0].StudentId);
+        setInterests(interestsData)
+        console.log(interestsData);
+        console.log(data);
       }
     };
 
@@ -76,6 +81,9 @@ const StudentSetting = () => {
           <div className="about">
             <div className="head">Interests</div>
             <div className="detail">{interests.join(", ") || "No interests defined"}</div>
+          </div>
+          <div className='changePassword'>
+            <Link to='/changePassword'><span>Change Password</span></Link>
           </div>
         </div>
       </div>

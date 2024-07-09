@@ -18,16 +18,18 @@ export default function ExpertHome() {
     setSearchTerm(e.target.value.toLowerCase());
   };
 
-
+console.log(allVideos) 
+// console.log(allVideos[0].Domain.Id) 
+console.log(sid) 
   const filteredAndSortedVideos = allVideos
     ? allVideos
-        .filter(video => video.DomainExpert.Users && video.DomainExpert.Users.Id === sid)
+        .filter(video => video.DomainExpertId === sid)
         // .filter(video => video.Title && video.Title.toLowerCase().includes(searchTerm))
-        .sort((a, b) => {
-          const ratingA = a.Rating || 0; // Default to 0 if no rating
-          const ratingB = b.Rating || 0; // Default to 0 if no rating
-          return ratingB - ratingA;
-        })
+        // .sort((a, b) => {
+        //   const ratingA = a.Rating || 0; // Default to 0 if no rating
+        //   const ratingB = b.Rating || 0; // Default to 0 if no rating
+        //   return ratingB - ratingA;
+        // })
     : [];
   // console.log(filteredAndSortedVideos);
 

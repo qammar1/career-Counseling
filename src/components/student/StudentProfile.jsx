@@ -4,7 +4,7 @@ import Nav from '../common/Nav';
 import { CounsellingContext } from '../../Context/ContextApi';
 import { getStudentByUserId } from '../../Context/AppContext';
 import { Link } from 'react-router-dom';
-
+import { getInterestByStudentId } from '../../Context/AppContext';
 const StudentProfile = () => {
   const [imageSrc, setImageSrc] = useState(dummy);
   const [name, setName] = useState('');
@@ -25,6 +25,10 @@ const StudentProfile = () => {
           if (data[0]?.StudentName) {
             setName(data[0].StudentName);
           }
+          const interestsData = await getInterestByStudentId(data[0].StudentId);
+          setDomains(interestsData)
+          console.log(interestsData);
+          console.log(data);
         } catch (error) {
           console.error("Failed to fetch student details:", error);
         }
@@ -64,7 +68,7 @@ const StudentProfile = () => {
           </div>
           <div className="about">
             <div className="head">Domain</div>
-            <div className="detail">{domains[0] || "No domains defined"}</div>
+            <div className="detail">{domains || "No domains defined"}</div>
           </div>
         </div>
       </div>

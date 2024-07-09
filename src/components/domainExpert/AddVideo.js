@@ -135,7 +135,7 @@ const AddVideo = () => {
               placeholder="Enter descrptions of video"
             />
           </div>
-          <div className="input-group">
+          {/* <div className="input-group">
             <label htmlFor="domain">Video Level:</label>
             <select
               id="level"
@@ -151,7 +151,7 @@ const AddVideo = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
           <div className="input-group">
             <label htmlFor="domain">Choose domain:</label>
             <select

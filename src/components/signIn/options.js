@@ -17,7 +17,7 @@ export default function options() {
       <div className="icon-main">
           <Link to="/signUpExpert">
         <div className="icon">
-          <i class="fa-solid fa-user-tie"></i>
+          <i className="fa-solid fa-user-tie"></i>
           <p className="icon-p">Domain Expert</p>
         </div>
           </Link>

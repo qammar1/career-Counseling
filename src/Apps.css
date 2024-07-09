@@ -1,6 +1,8 @@
+
+
 /* basic colors */
 :root {
-  --green-color:rgb(12, 152, 117) ;
+  --green-color:#37A987 ;
   --hover-color:rgb(0, 202, 114);
   --gray-color: #c8cac9;
   --text-color: #212529;
@@ -24,15 +26,19 @@
 }
 
 .image-container img {
+  height: 189px !important;
   display: block;
-  width: 100%;
-  height: auto;
+  /* width: 71vw !important; */
+  
 }
 
 /* Card Content */
 .Cardcontent {
   padding: 10px;
 }
+/* .Cardcontent p{
+  padding: 9px 0px 0px 0px;
+} */
 .Cardcontent h3{
   margin-top: 0px;
   margin-bottom: 10px;
@@ -58,7 +64,7 @@
 
 .views {
   color: #888;
-  font-size: 17px;
+  font-size: 1rem;
   margin-top: 10px;
 }
 .stars {
@@ -172,7 +178,7 @@ body, html {
   color: white;
   border: none;
   position: fixed;
-  top: -15px;
+  top: -9px;
   left: 15px;
   width: 35px;
   height: 35px;
@@ -182,9 +188,9 @@ body, html {
   z-index: 2;
 }
 
-.openbtn:hover {
+/* .openbtn:hover {
   background-color:var(--hover-color);
-}
+} */
 
 .content {
   transition: margin-left .5s;
@@ -258,7 +264,7 @@ body, html {
   align-items: center;
 }
 .term p{
-  padding-left: 15px;
+  padding-left: 8px;
   display: flex;
   justify-content: center;
 }
@@ -322,11 +328,12 @@ padding-top: 7cap;
 }
 .description-clamp {
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* Number of lines you want to display */
+  -webkit-line-clamp: 2; /* Number of lines you want to display */
   -webkit-box-orient: vertical;  
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: pre-wrap; 
+  padding: 9px 0px 0px 0px;
 }
 .player-description{
   width: 800px ;
@@ -437,6 +444,7 @@ padding-top: 7cap;
 .title {
   color: black;
   font-weight: bold;
+  margin-bottom: 5px !important;
 }
 
 .description {
@@ -446,6 +454,7 @@ padding-top: 7cap;
 .expert-info {
   display: flex;
   align-items: center;
+  padding: 20px 0px 0px 0px;
 }
 
 .expert-image {
@@ -555,5 +564,47 @@ padding-top: 7cap;
 
 .rating {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+.container {
+  padding: 15px;
+  background-color: #FFFFFF;
+  flex: 1;
+  padding-top: 5cap;
+}
+
+.content {
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.title {
+  color: #343434;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.subTitle {
+  color: #343434;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.listTitle {
+  color: #343434;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.text {
+  color: #343434;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.highlight {
+  color: #008B8B;
 }

@@ -15,10 +15,10 @@ const VideoCard = ({ video }) => {
     useContext(CounsellingContext);
 
   useEffect(() => {
-    setName(video.Name);
+    setName(video.DomainExpert);
     // console.log(video);
   }, []);
-// console.log(video)
+console.log(video)
   const object = {
     vId: video.Id,
     name: name,
@@ -30,7 +30,7 @@ const VideoCard = ({ video }) => {
     image: imageSrc,
     views:video.ViewsCount,
   };
-  // console.log(object)
+  // console.log(video.DomainExpert.Users)
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -62,7 +62,7 @@ const VideoCard = ({ video }) => {
 
   return (
     <div className="cardVideo">
-      <Link to="/videoPlayer" state={{ object: object }}>
+      {/* <Link to="/videoPlayer" state={{ object: object }}> */}
         <div className="image-container">
           <img
             src={thumbnailUrl}
@@ -70,22 +70,22 @@ const VideoCard = ({ video }) => {
             style={{ width: "270px", height: "150px" }}
           />
         </div>
-      </Link>
+      {/* </Link> */}
       <div className="Cardcontent">
+      <p style={{ textTransform: "capitalize", background:' linear-gradient(103deg, rgba(55,169,135,1) 0%, rgba(71,208,167,1) 51%, rgba(69,221,175,1) 100%)',color:'white', width:'fit-Content',padding:'6px',borderRadius:'10px' }}>
+         {video.Domain.Title}
+        </p>
         <h3
           className="description-clamp"
           style={{ textTransform: "capitalize" }}
         >
           {video.Title}
         </h3>
-        <p style={{ textTransform: "capitalize", background:' linear-gradient(103deg, rgba(55,169,135,1) 0%, rgba(71,208,167,1) 51%, rgba(69,221,175,1) 100%)',color:'white', width:'fit-Content',padding:'6px',borderRadius:'10px' }}>
-         {video.Domain.Title}
-        </p>
-        <p className="description-clamp">{video.Description}</p>
+        
+        {/* <p className="description-clamp">{video.Description}</p> */}
         <div className="user-profile">
           <img src={imageSrc || userImg} alt="User" className="user-image" />
-          {/* <span className="user-name">{video.DomainExpert.Users.Name}</span> */}
-          <span className="user-name">{video.Name}</span>
+          <span className="user-name">{video.DomainExpert.Users.Name}</span>
         </div>
         {/* <div className="rating">
           <div className="stars">

@@ -38,4 +38,229 @@
     color: #FFF;
     cursor: pointer;
   }
+  .test{
+    padding-top: 5cap;
+  }
+
+
+  /* ///////////////////////////////////////// test                */
+  .background {
+    padding: 20px;
+  }
   
+  .title {
+    color: black;
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .interest-list {
+    margin-bottom: 20px;
+  }
+  
+  .interest-item {
+    padding: 10px;
+    color: #353535;
+    border: 1px solid #008B8B;
+    margin-vertical: 4px;
+    font-size: 20px;
+    border-radius: 8px;
+    margin-top: 9px ;
+  }
+  
+  .refresh-button {
+    margin-bottom: 20px;
+  }
+  
+  .action-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: center;
+  }
+  
+  .action-button {
+    margin-left: 5px;
+    color: #008B8B;
+    font-size: 16px;
+    background: transparent;
+  }
+  
+  .modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #353535;
+  }
+  
+  .input {
+    width: 100%;
+    border: 1px solid #008B8B;
+    padding: 10px;
+    color: #353535;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .suggestions-list {
+    width: 100%;
+    margin-vertical: 8px;
+    color: #353535;
+    border: 1px solid #008B8B;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .suggestion-item {
+    padding: 10px;
+    color: #353535;
+    border-bottom: 1px solid #008B8B;
+    cursor: pointer;
+  }
+  
+  .text {
+    margin: 4px;
+    font-size: 16px;
+    color: black;
+  }
+  
+  .modal-button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button {
+    border-radius: 8px;
+    padding: 8px;
+    margin-horizontal: 5px;
+    cursor: pointer;
+  }
+  
+  .save-button {
+    background-color: #008B8B;
+    color: white;
+  }
+  
+  .cancel-button {
+    background-color: #FF9933;
+    color: white;
+  }
+  /* ////////////////////////////////// initial test */
+  .background {
+    background-color: #fff;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .question {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .loading {
+    font-size: 18px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  .button.yes {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    /* background-color: green; */
+    color: white;
+  }
+  
+  .button.no {
+    background-color: red;
+    color: white;
+  }
+  
+  .button.disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }
+  
+  .question-container {
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .input {
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .suggestions-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 100px;
+    overflow-y: auto;
+  }
+  
+  .suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .suggestion-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .selected-interest-container {
+    margin-top: 10px;
+  }
+  
+  .selected-interest {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    margin: 5px;
+    border-radius: 5px;
+  }
+  
+  .check-icon {
+    color: green;
+    font-size: 24px;
+  }
+  .Questionnaires{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

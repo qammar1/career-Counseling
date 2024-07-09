@@ -5,13 +5,14 @@ import { Link} from "react-router-dom";
 function Nav({ onSearch }) {
   const [isOpen, setIsOpen] = useState(false);
   const [image, setUserImage] = useState(dummy);
-  const [user, setUser] = useState("Domain Expert");
+  const [user, setUser] = useState("");
   const { userData, flag, getUserProfilePic } = useContext(CounsellingContext);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
   const hideButton = () => {
     setIsOpen(!isOpen);
   };
+  // console.log(image)
   // const navigate = useNavigate();
   const signOut = () => {
     // navigate('/signIn', { replace: true });
@@ -37,10 +38,11 @@ function Nav({ onSearch }) {
         const fetchImage = async () => {
             try {
                 const profilePic = await getUserProfilePic(userData.UserName);
-                if (profilePic !== "Image not found") {
-                    setUserImage(profilePic);
-                } else {
+                // console.log(profilePic)
+                if (profilePic == "Image not found" || profilePic==null) {
                     setUserImage(dummy);
+                } else {
+                    setUserImage(profilePic);
                 }
             } catch (error) {
                 console.error("Failed to fetch user image", error);
@@ -107,7 +109,7 @@ function Nav({ onSearch }) {
           ) : null}
           {user === "Student" ? (
             <div className="addVideobtn">
-              <Link to="/allVideos">
+              <Link to="/interestVideos">
                 <i className="fas fa-video"></i>
               </Link>
               <Link to="/studentProfile">
@@ -130,8 +132,20 @@ function Nav({ onSearch }) {
               </Link>
               <Link to="/allEvents" onClick={hideButton}>
                 <div className="term">
-                  <i class="fa-regular fa-calendar-days"></i>
-                  <p class="no-wrap">All Events</p>
+                  <i className="fa-regular fa-calendar-days"></i>
+                  <p className="no-wrap">All Events</p>
+                </div>
+              </Link>
+              <Link to="/addQuestion" onClick={hideButton}>
+                <div className="term">
+                  <i className="fa-regular fa-calendar-days"></i>
+                  <p className="no-wrap">Add Question</p>
+                </div>
+              </Link>
+              <Link to="/teacherQuestions" onClick={hideButton}>
+                <div className="term">
+                  <i className="fa-regular fa-calendar-days"></i>
+                  <p className="no-wrap">Questions</p>
                 </div>
               </Link>
             </div>
@@ -175,11 +189,12 @@ function Nav({ onSearch }) {
             <>
               <Link to="/test" onClick={toggleSidebar}>
                 <div className="term">
-                  <i class="fa-solid fa-file-lines"></i>
+                  <i className="fa-solid fa-file-lines"></i>
                   <p>Test</p>
                 </div>
               </Link>
               <Link to="/interestVideos" onClick={toggleSidebar}>
+              {/* <Link to="/allVideos" onClick={toggleSidebar}> */}
                 <div className="term">
                   <i className="fas fa-video"></i>
                   <p>Videos</p>
@@ -215,14 +230,26 @@ function Nav({ onSearch }) {
             <>
               <Link to="/addTeacher" onClick={toggleSidebar}>
                 <div className="term">
-                  <i class="fa-solid fa-user-tie"></i>
-                  <p class="no-wrap">Add Teacher</p>
+                  <i className="fa-solid fa-user-tie"></i>
+                  <p className="no-wrap">Add Teacher</p>
                 </div>
               </Link>
               <Link to="/addStudent" onClick={toggleSidebar}>
                 <div className="term">
-                  <i class="fa-solid fa-user"></i>
-                  <p class="no-wrap">Add Student</p>
+                  <i className="fa-solid fa-user"></i>
+                  <p className="no-wrap">Add Student</p>
+                </div>
+              </Link>
+              {/* <Link to="/allTeacher" onClick={toggleSidebar}>
+                <div className="term">
+                <i class="fa-solid fa-user-group"></i>
+                  <p className="no-wrap">All Teachers</p>
+                </div>
+              </Link> */}
+              <Link to="/allStudents" onClick={toggleSidebar}>
+                <div className="term">
+                <i class="fa-solid fa-user-group"></i>
+                  <p className="no-wrap">All Students</p>
                 </div>
               </Link>
               <Link to="/schoolSetting" onClick={toggleSidebar}>

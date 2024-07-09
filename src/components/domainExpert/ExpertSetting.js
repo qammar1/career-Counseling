@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import defaultUser from "../common/user.png";
 import Nav from "../common/Nav";
 import { CounsellingContext } from "../../Context/ContextApi";
+import { Link } from "react-router-dom";
 
 const ExpertSetting = () => {
   const [imageSrc, setImageSrc] = useState(defaultUser);
@@ -86,6 +87,12 @@ const ExpertSetting = () => {
           <div className="about">
             <div className="head">Domain</div>
             <div className="detail">{domains.join(", ")}</div>
+          </div>
+          <div className='changePassword'>
+            <Link to='/changePassword'><span>Change Password</span></Link>
+          </div>
+          <div className='changePassword'>
+            <Link to='/privacyPolicy'><span>Privacy Policy</span></Link>
           </div>
         </div>
       </div>

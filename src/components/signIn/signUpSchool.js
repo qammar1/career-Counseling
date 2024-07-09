@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { getAllDomain, addDomainExpert } from "../../Context/AppContext";
+import { addSchool } from "../../Context/AppContext";
  function SignUpSchool() {
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [domain, setDomain] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const [address, setAddress] = useState("");
   const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
@@ -19,9 +18,9 @@ import { getAllDomain, addDomainExpert } from "../../Context/AppContext";
     setPassword("");
     setAddress("");
   };
-
-  const DomainExpert = {
+  const School = {
     Name: name,
+    Address: address,
   };
 
   const UserData = {
@@ -30,6 +29,7 @@ import { getAllDomain, addDomainExpert } from "../../Context/AppContext";
     Password: password,
     Phone: phone,
   };
+
 
   //password visibility
   const togglePasswordVisibility = () => {
@@ -40,7 +40,12 @@ import { getAllDomain, addDomainExpert } from "../../Context/AppContext";
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      
+      const result = await addSchool(School, UserData);
+      if (result) {
+        setIsSignUpSuccess(true);
+        resetFields(); 
+        setTimeout(() => setIsSignUpSuccess(false), 3000);
+      }
     } catch (error) {
       console.error("Error in SignUp:", error.message);
     }
@@ -111,13 +116,13 @@ import { getAllDomain, addDomainExpert } from "../../Context/AppContext";
         </div>
 
         <div className="input-group">
-          <label htmlFor="domain">Address:</label>
+          <label htmlFor="address">Address:</label>
           <input
-              type={showPassword ? "text" : "password"}
-              id="password"
+              type="text"
+              id="address"
               placeholder="Enter Address"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               required
             />
         </div>

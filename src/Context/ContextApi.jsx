@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import img from '../components/common/user.png'
+import React, { useEffect, useState,useContext  } from "react";
+
 const CounsellingContext = React.createContext();
-var url = "http://192.168.0.105/CareerCounselligBackend/api/careercounselling/";
+// export const useUser = () => useContext(CounsellingContext);
+var url = "http://192.168.43.246/CareerCounselligBackend/api/careercounselling/";
 function DataProvider({ children }) {
   const [userData, setUserData] = useState({});
    const [flag, setFlag] = useState(true);
@@ -9,7 +10,14 @@ function DataProvider({ children }) {
   const [allVideos, setAllVideos] = useState([]);
   const [Loading, setLoading] = useState(false);
   const [expertData, setExpertData] = useState([]);
+  const [rating, setRating] = useState(0);
   // const [updateFlag, setUpdateFlag] = useState(false);
+
+
+  const updateUser = (newUserData) => {
+    setUserData(newUserData);
+    localStorage.setItem("userData", JSON.stringify(newUserData));
+  };
   
   const handleSignIn = async (username, password) => {
     setLoading(true);
@@ -40,7 +48,9 @@ function DataProvider({ children }) {
         url + "getDomainExpertByUserId?id=" + encodeURIComponent(userId)
       );
       const data = await response.json();
-      return data;
+      if(response.ok){
+        return data;
+      }
     } catch (error) {
       console.error("Error fetching Domain Expert data:", error);
     }
@@ -119,13 +129,12 @@ const getUserById = async id => {
       const getUserProfilePic = async (imageName) => {
         if(imageName){
           try {
-           
             const response = await fetch(`${url}SearchImage?imageName=${encodeURIComponent(imageName)}`);
             if (!response.ok) {
               return null;  // or any other appropriate value or action
           }
             const data = await response.json();
-            if(data){
+            if(response.ok){
               return data;
             }else{
               return null;
@@ -180,7 +189,10 @@ const getUserById = async id => {
         flag,
         setFlag,
         getUserById,
-        uploadRating
+        uploadRating,
+        updateUser,
+        rating,
+        setRating,
       }}
     >
       {children}

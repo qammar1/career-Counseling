@@ -1,24 +1,29 @@
 import React from "react";
 
-export default function SingleEvent() {
-  const title = "AI in health care";
-  const des =
-    "Ai in health careai in health careai in health careai in health careai in health care";
-  const date = "December 15,2023";
-  const sTime = "3:00PM";
-  const eTime = "5:00PM";
-  const expert = "Ali Ahmed"
+export default function SingleEvent({ e }) {
+  console.log(e);
+  const title = e.Title;
+  const des = e.Description;
+  const date = new Date(e.ConductDate);
+  const sTime = e.StartTime;
+  const eTime = e.EndTime;
+  const expert = e.DomainExpert.Name;
+
   return (
     <div>
       <div className="crd">
-        <h4>{title}</h4>
-        <p className="des">{des}</p>
-        <p>Coming Guest -- “ {expert} ”</p>
-        <div className="date-time">
-          <span>{date}</span>
-          <span style={{paddingRight:4}}>
-            {sTime} - {eTime}
-          </span>
+        <div style={{ padding: "10px" }}>
+          <h4 style={{ padding: "5px 0px 5px 0px" }}>{title}</h4>
+          <p className="des">{des}</p>
+          <p style={{ padding: "5px 0px 5px 0px" }}>Guest -- “ {expert} ”</p>
+          <div className="date-time">
+            <span style={{ padding: "5px 0px 5px 0px" }}>
+              {date.toLocaleDateString()}
+            </span>
+            <span style={{ paddingRight: 4, paddingTop: 5 }}>
+              {sTime} - {eTime}
+            </span>
+          </div>
         </div>
       </div>
     </div>
